@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script>
+        var incr = 0;
+        $( document ).ready(function() {
+            verification_connexion();
+        });
+    </script>
+
+    <div id="snackbar"></div>
+</head>
+<body>
+<div id="" class="">
+    <div class="">
+        <form id="question_form" action="index.php" method="post">
+            <label for="kidzz_name">
+                nom
+                <input type="text" class="" id="kidzz_name" name="nom" required>
+            </label>
+
+            <label for="user_pass">
+                description
+                <input type='kidzz_description' class="" id="kidzz_description" name="description" required>
+            </label>
+            <div id="question_area">
+                <li id="question_1" class="question_form">
+                    question n°1 :
+                    <span>Nom :</span>
+                    <label id="form_label_1">
+
+                    </label>
+                    <input type="text" name="question_1" required="required">
+                </li>
+                <li id="answer_1_1">
+                    <span>Réponse 1 :</span>
+                    <input type="text" name="answer_1_1" required="required"> <input type="checkbox" name="answer_1_1_validity">
+                </li>
+                <li id="answer_2_1">
+                    <span>Réponse 2 :</span>
+                    <input type="text" name="answer_2_1" required="required"> <input type="checkbox" name="answer_2_1_validity">
+                </li>
+                <li id="answer_3_1">
+                    <span>Réponse 3 :</span>
+                    <input type="text" name="answer_3_1" required="required"> <input type="checkbox" name="answer_3_1_validity">
+                </li>
+                <li id="answer_4_1">
+                    <span>Réponse 4 :</span>
+                    <input type="text" name="answer_4_1" required="required"> <input type="checkbox" name="answer_4_1_validity">
+                </li>
+                <li id="form_explication_1">
+                    <span>explication :</span>
+                    <input type="text" name="question_1_explication" required="required">
+                </li></div>
+
+    </div>
+    <div id="remove_question">
+
+    </div>
+    <li class="">
+        <label class="" for="addQuestion">
+            <input id="addQuestion" class="" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
+            <span class="">Ajouter une question</span>
+        </label>
+    </li>
+    <li id="share">
+        <span>partagé :</span>
+        <input type="checkbox" name="share" checked>
+    </li>
+    <input class="" type="button" onclick="creer_kidzz('question_form')" value="valider">
+    </form>
+
+
+</div>
+<a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+</body>
+</html>

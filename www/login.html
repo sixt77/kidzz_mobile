@@ -11,22 +11,23 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
-
+    <div id="snackbar"></div>
 </head>
-<body>
-<div id="snackbar"></div>
-<input type="text" placeholder="id" id="id_field">
-<input type="password" placeholder="password" id="password_field">
-<input type="button" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
-<input type="button" onclick="preparation_formulaire()">
 
-<form id="form_test">
-    <input type="text" name="value1">
-    <input type="text" name="value2">
-</form>
+<body>
+<div id="login">
+    <input type="text" placeholder="id" id="id_field">
+    <input type="password" placeholder="password" id="password_field">
+    <input type="submit" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
+</div>
+
 
 </body>
 </html>

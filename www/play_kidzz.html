@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script>
+        var incr = 0;
+        $( document ).ready(function() {
+            verification_connexion();
+            preparation_jeux();
+        });
+    </script>
+
+    <div id="snackbar"></div>
+</head>
+<body>
+<div id="game_setup"  class="game_div">
+    <div id="player_list">
+
+        <div id="user_area">
+            <li id="joueur_1" class="user_form">joueur 1 :<label id="form_label_1"></label><input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required">
+            </li>
+        </div>
+
+    </div>
+
+    <li class="">
+        <label class="" for="addUser">
+            <input id="addUser" class="kidzz_button" type="button" onclick="add_user('user_area', count_class('user_form')+1)" value="+">
+        </label>
+    </li>
+    <div id="remove_user"></div>
+    <input type="button" class="kidzz_button" value="go !" onclick="start_game()">
+
+</div>
+<div id="game" class="large_game_div" style="display: none">
+    <div id="player_in_game_list" class=" droptarget kidzz_div"></div>
+    <div id="question" class="kidzz_div"></div>
+    <div id="reponse" class="answer_div"></div>
+    <div id="explication" class="kidzz_div"></div>
+    <input type="button" value="valider le tour" onclick="valid_turn()">
+</div>
+<div id="end_game"  class="large_game_div"  style="display: none">
+    <div id="player_list_end_game">
+    </div>
+    <form action="index.php" method="post">
+        <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
+            <input class="" type="checkbox" id="favoris" name="favoris" >
+            <span class="">ajouter au favoris</span>
+        </label>
+
+
+    </form>
+    <form action="index.php" method="post">
+        <input type="text" name="motif" required>
+    </form>
+
+    <form action="index.php" method="post">
+        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+    </form>
+</div>
+
+
+
+</body>
+</html>

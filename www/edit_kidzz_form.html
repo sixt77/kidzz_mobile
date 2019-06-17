@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script>
+        $( document ).ready(function() {
+            verification_connexion();
+
+        });
+    </script>
+    <div id="snackbar"></div>
+</head>
+<body>
+<div class="">
+    <div class="">
+        <form id="question_form" action="index.php" method="post">
+            <label for="kidzz_name">
+                nom
+                <input type="text" class="" id="kidzz_name" name="nom" value="<?php echo $kidzz['info']['nom']?>" required>
+            </label>
+
+            <label for="kidzz_description">
+                description
+                <input type='text' class="" id="kidzz_description" name="description" value="<?php echo $kidzz['info']['description']?>" required>
+            </label>
+            <div id="question_area">
+
+            </div>
+        </form>
+    </div>
+    <div id="remove_question">
+
+    </div>
+    <li class="">
+        <label class="" for="addQuestion">
+            <input id="addQuestion" class="" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
+            <span class="">Ajouter une question</span>
+        </label>
+    </li>
+
+    <li id="share">
+        <span>partagé :</span>
+
+
+    </li>
+    <button type="submit" class=""  name="edit_kidzz" value="<?php echo $kidzz['info']['id']?>">valider</button>
+</div>
+<a href="home.html" ><button type="button" class=""  name="home" value="">accueil</button></a>
+<script>
+    $( document ).ready(function() {
+        fill_question("question_area");
+    });
+</script>
+</body>

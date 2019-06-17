@@ -1,0 +1,94 @@
+body {
+    font-family: 'Roboto', 'PT Sans', sans-serif;
+    font-size: 15px;
+}
+li{
+    list-style: none;
+}
+.kidzz_input{
+    font-size: 24px;
+    width: 100%;
+    height: 40px;
+    padding: 3px 6px;
+    border: 1px solid #ddd;
+    border-top-color: rgb(221, 221, 221);
+    border-right-color: rgb(221, 221, 221);
+    border-bottom-color: rgb(221, 221, 221);
+    border-left-color: rgb(221, 221, 221);
+    color: #32373c;
+    border-radius: 5px;
+}
+.kidzz_input:focus{
+    border-color: #5b9dd9;
+    box-shadow: 0 0 2px rgba(30,140,190,.8);
+}
+.kidzz_button{
+    margin: 20px auto 0;
+    border: 1px solid #D5211D;
+    border-radius: 3px;
+    font-family: "Roboto";
+    font-size: 20px;
+    display: block;
+    padding: 5px 15px;
+    color: #FFF;
+    cursor: pointer;
+    background-color: #f73f3f;
+    text-shadow: 0 -1px 1px #D52114, 1px 0 1px #D52114, 0 1px 1px #D52114, -1px 0 1px #D52114;
+    min-width: 80px;
+}
+.user_form{
+    text-align: center;
+}
+.game_div{
+    width: 320px;
+    margin: 0 auto;
+}
+.large_game_div{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.reponse_div{
+    width: 400px;
+    height: 100px;
+    float: left;
+    margin: 50px;
+}
+.reponse_div_1{
+    background-color: #D5211D;
+}
+.reponse_div_2{
+    background-color: #5b9dd9;
+}
+.reponse_div_3{
+    background-color: chartreuse;
+}
+.reponse_div_4{
+    background-color: darkorange;
+}
+.answer_div{
+    width: 100%;
+    border-style: double;
+    border-color: black;
+    border-width: 1px;
+    margin: auto;
+    height: 400px;
+    text-align: center;
+}
+.kidzz_div{
+    width: 400px;
+    height: 100px;
+    border-style: double;
+    border-color: black;
+    border-width: 1px;
+    margin: auto;
+    text-align: center;
+}
+.question_div{
+
+}
+
+
+.hide_by_text{
+    display: none;
+}
