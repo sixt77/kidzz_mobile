@@ -21,7 +21,8 @@
     <script>
         $( document ).ready(function() {
             verification_connexion();
-
+            verification_reseau();
+            edition_kidzz();
         });
     </script>
     <div id="snackbar"></div>
@@ -32,12 +33,12 @@
         <form id="question_form" action="index.php" method="post">
             <label for="kidzz_name">
                 nom
-                <input type="text" class="" id="kidzz_name" name="nom" value="<?php echo $kidzz['info']['nom']?>" required>
+                <input type="text" class="" id="kidzz_name" name="nom" value="" required>
             </label>
 
             <label for="kidzz_description">
                 description
-                <input type='text' class="" id="kidzz_description" name="description" value="<?php echo $kidzz['info']['description']?>" required>
+                <input type='text' class="" id="kidzz_description" name="description" value="" required>
             </label>
             <div id="question_area">
 
@@ -59,12 +60,7 @@
 
 
     </li>
-    <button type="submit" class=""  name="edit_kidzz" value="<?php echo $kidzz['info']['id']?>">valider</button>
+    <input type="button" value="valider" onclick="modifie_kidzz('question_form')">
 </div>
-<a href="home.html" ><button type="button" class=""  name="home" value="">accueil</button></a>
-<script>
-    $( document ).ready(function() {
-        fill_question("question_area");
-    });
-</script>
+<a href="index.html" ><button type="button" class=""  name="home" value="">accueil</button></a>
 </body>

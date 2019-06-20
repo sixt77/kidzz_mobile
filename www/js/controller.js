@@ -93,7 +93,7 @@ function connexion_callback(response) {
     response = JSON.parse(response);
     if(response !== null && response[0] !== undefined){
         sessionStorage.setItem('utilisateur', JSON.stringify(response));
-        document.location.href="home.html";
+        document.location.href="index.html";
     }else{
         show_snack_bar("connexion refusé");
     }
@@ -110,6 +110,8 @@ function verification_connexion() {
         document.location.href="login.html";
     }
 }
+
+
 
 //place la session dans un formulaire
 function recuperation_session(){
@@ -156,14 +158,24 @@ function preparation_edition_kidzz(id) {
     document.location.href="edit_kidzz_form.html";
 }
 function edition_kidzz() {
-    envoie_formulaire(recuperation_session(), edition_kidzz_callback, 'edit_kidzz_form', sessionStorage.getItem('id_kidzz'));
+    envoie_formulaire(recuperation_session(), edition_kidzz_callback, 'edit_kidzz_form', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
 }
 function edition_kidzz_callback(response) {
-    document.location.href="manage_kidzz.html";
+    var kidzz = JSON.parse(response)['info'];
+    fill_kidzz(kidzz)
+    items = JSON.parse(response)['question'];
+    fill_question("question_area");
 }
 
 //modification de kidzz
+function modifie_kidzz(id) {
+    envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+}
 
+function modifie_kidzz_callback(response) {
+    console.log(response);
+    //document.location.href="manage_kidzz.html";
+}
 
 
 
@@ -240,6 +252,20 @@ function preparation_jeux_callback(response) {
 
 ////////////////////////////////////////////////////////TEST//////////////////////////////////////////////////////////////////////////////////////////////
 
+//mode hors ligne
+//verification
+function verification_reseau() {
+    document.addEventListener("offline", mode_hors_ligne, false);
+    document.addEventListener("online", mode_en_ligne, false);
+}
+//mode hors ligne
+function mode_hors_ligne() {
+    show_snack_bar("hors ligne");
+}
+//mode en ligne
+function mode_en_ligne() {
+    show_snack_bar("en ligne");
+}
 
 
 

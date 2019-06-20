@@ -9,6 +9,12 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.kidzz.kidzz"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.kidzz.kidzz"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.kidzz.kidzz"
     }
   },
   "dependent_plugins": {}

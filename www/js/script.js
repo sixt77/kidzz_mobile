@@ -45,6 +45,12 @@ function delete_question(){
         remove_id("form_delete_button");
     }
 }
+//rempli les infos du kidzz
+function fill_kidzz(kidzz) {
+    document.getElementById('kidzz_name').value = kidzz['nom'];
+    document.getElementById('kidzz_description').value = kidzz['description'];
+}
+
 
 //ajout de question a la modification de kidzz
 function fill_question(id) {
@@ -53,19 +59,19 @@ function fill_question(id) {
         document.getElementById(id).appendChild(create_element("LI", "question_"+(i+1), "question_form", "", "question n°"+(i+1)+" :"));
         document.getElementById("question_"+(i+1)).appendChild(create_element("span", "", "", "", "Nom :"));
         document.getElementById("question_"+(i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
-        document.getElementById("question_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1), "required", items[i][2]));
+        document.getElementById("question_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1), "required", items[i]['info']['valeur']));
 
 
         //ajout reponse
-        for (var j = 4; j < items[i].length; j++) {
-            document.getElementById(id).appendChild(create_element("LI", "answer_"+(j-3)+"_"+(i+1), "", "", ""));
-            document.getElementById("answer_"+(j-3)+"_"+(i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j-3)+" :"));
-            document.getElementById("answer_"+(j-3)+"_"+(i+1)).appendChild(create_element("label", "form_label_"+i, "", "", ""));
-            document.getElementById("answer_"+(j-3)+"_"+(i+1)).appendChild(create_input("text", "", "","answer_"+(j-3)+"_"+(i+1), "required", items[i][j][0]));
-            if(items[i][j][1] ==  1){
-                document.getElementById("answer_"+(j-3)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j-3)+"_"+(i+1)+"_validity", "", "", true));
+        for (var j = 0; j < items[i]['answer'].length; j++) {
+            document.getElementById(id).appendChild(create_element("LI", "answer_"+(j+1)+"_"+(i+1), "", "", ""));
+            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
+            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_element("label", "form_label_"+i, "", "", ""));
+            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("text", "", "","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
+            if(items[i]['answer'][j]['valide'] ==  1){
+                document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", "", "", true));
             }else{
-                document.getElementById("answer_"+(j-3)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j-3)+"_"+(i+1)+"_validity", ""));
+                document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
             }
 
         }
@@ -74,7 +80,7 @@ function fill_question(id) {
         document.getElementById(id).appendChild(create_element("LI", "form_explication_"+(i+1), "", "", ""));
         document.getElementById("form_explication_"+(i+1)).appendChild(create_element("span", "", "", "", "explication :"));
         document.getElementById("form_explication_"+(i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
-        document.getElementById("form_explication_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1)+"_explication", "required", items[i][3]));
+        document.getElementById("form_explication_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1)+"_explication", "required", items[i]['info']['explication']));
 
         if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
             document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
