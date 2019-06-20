@@ -88,26 +88,41 @@ function connexion(login, password) {
     identification(login, password, connexion_callback);
 }
 
+//connexion
+function connexion_automatique() {
+    var utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+    identification_automatique(utilisateur[1], utilisateur[2], connexion_callback);
+}
+
 //connexion callback
 function connexion_callback(response) {
     response = JSON.parse(response);
+    console.log(response);
     if(response !== null && response[0] !== undefined){
         sessionStorage.setItem('utilisateur', JSON.stringify(response));
-        document.location.href="index.html";
+        localStorage.setItem('utilisateur', JSON.stringify(response));
+        document.location.href="home.html";
     }else{
         show_snack_bar("connexion refusé");
+        sessionStorage.removeItem('utilisateur');
+        localStorage.removeItem('utilisateur');
     }
 
 }
 //déconnexion
 function deconnexion() {
     sessionStorage.clear();
-    document.location.href="login.html";
+    localStorage.clear();
+    document.location.href="index.html";
 }
 //redirection en cas de non connexion
 function verification_connexion() {
     if(sessionStorage.getItem('utilisateur') == null){
-        document.location.href="login.html";
+        if(localStorage.getItem("utilisateur") != null){
+            connexion_automatique();
+        }else{
+            document.location.href="index.html";
+        }
     }
 }
 
@@ -162,7 +177,7 @@ function edition_kidzz() {
 }
 function edition_kidzz_callback(response) {
     var kidzz = JSON.parse(response)['info'];
-    fill_kidzz(kidzz)
+    fill_kidzz(kidzz);
     items = JSON.parse(response)['question'];
     fill_question("question_area");
 }
@@ -268,7 +283,36 @@ function mode_en_ligne() {
 }
 
 
+//sauvegarde
+function read_data(id, key) {
+    document.getElementById(id).value = window.localStorage.getItem(key);
+}
+
+function write_data(id, key) {
+    window.localStorage.setItem(key, document.getElementById(id).value);
+}
 
 
+//connexion automatique
+function preparation_connexion_automatique() {
+    if(localStorage.getItem("utilisateur") != null){
+        connexion_automatique();
+    }
+}
 
-
+//recuperation des données hors ligne
+function recuperation_kidzz_hors_ligne() {
+    console.log(sessionStorage.getItem('utilisateur'));
+    envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
+}
+function recuperation_kidzz_hors_ligne_callback(response) {
+    response = JSON.parse(response);
+    if(JSON.stringify(response).length < 2000000){
+        localStorage.removeItem("kidzz");
+        localStorage.setItem("kidzz", JSON.stringify(response));
+        show_snack_bar("enregistrement ok");
+        console.log(JSON.parse(localStorage.getItem("kidzz")));
+    }else{
+        show_snack_bar("pas assez d'espace de stockage");
+    }
+}

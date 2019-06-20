@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -14,25 +13,25 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
 
-
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
     <script>
         $( document ).ready(function() {
-            preparation_connexion_automatique();
+
         });
     </script>
     <div id="snackbar"></div>
 </head>
-
 <body>
-<div id="login">
-    <input type="text" placeholder="id" id="id_field">
-    <input type="password" placeholder="password" id="password_field">
-    <input type="submit" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
-</div>
 
-<a href="test.html"><input type="button" value="test"></a>
+<textarea id ="testarea1"></textarea>
+<textarea id ="testarea2"></textarea>
+<input type="button" value="save" onclick="write_data('testarea1', 'test')">
+<input type="button" value="get" onclick="read_data('testarea2', 'test')">
+<input type="button" value="sync" onclick="recuperation_kidzz_hors_ligne()">
+
 </body>
+
 </html>

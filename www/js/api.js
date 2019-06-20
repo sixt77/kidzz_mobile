@@ -28,27 +28,19 @@ function identification(identifiant, password, success){
         }
     }
 }
-//gestion des kidzz
 
-
-
-//jeux
-//partie simple
-//choix du kidzz dans les kidzz en ligne
-
-
-//choix du kidzz dans les kidzz de l'utilisateur
-
-
-
-//choix du kidzz dans les favoris de l'utilisateur
-
-
-//lancement de la partie
-
-
-
-//notation du kidzz
+//gestion des utilisateurs
+//fonction d'identification automatique
+function identification_automatique(identifiant, password, success){
+    var request = new XMLHttpRequest();
+    request.open('GET', host+'api?access=api&action=automatic_login&login='+identifiant+'&password='+password, true);  // `false` makes the request synchronous
+    request.send(null);
+    request.onreadystatechange = function () {
+        if(request.readyState === 4){
+            success(request.responseText);
+        }
+    }
+}
 
 
 
