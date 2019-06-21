@@ -9,6 +9,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/off_line_controller.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -30,7 +31,62 @@
 <textarea id ="testarea2"></textarea>
 <input type="button" value="save" onclick="write_data('testarea1', 'test')">
 <input type="button" value="get" onclick="read_data('testarea2', 'test')">
-<input type="button" value="sync" onclick="recuperation_kidzz_hors_ligne()">
+<input type="button" value="sync" onclick="verification_kidzz_hors_ligne()">
+<input type="button" value="mes kidzz" onclick="recuperation_hors_ligne_mes_kidzz()">
+<input type="button" value="mes favoris" onclick="recuperation_hors_ligne_kidzz_favoris()">
+<input type="text" id="test_input">
+<input type="button" value="preparer jeux" onclick="preparation_hors_ligne_jeux(document.getElementById('test_input').value)">
+<div id="play_my_kidzz" class="">
+    <div id="kidzz_list">
+        <input type="text" id="search_bar" class="" onchange="sort_kidzz(this.value, kidzz, 'kidzz_div_list')" placeholder="Recherche..">
+    </div>
+</div>
+
+<div id="game_setup"  class="game_div">
+    <div id="player_list">
+
+        <div id="user_area">
+            <li id="joueur_1" class="user_form">joueur 1 :<label id="form_label_1"></label><input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required">
+            </li>
+        </div>
+
+    </div>
+
+    <li class="">
+        <label class="" for="addUser">
+            <input id="addUser" class="kidzz_button" type="button" onclick="add_user('user_area', count_class('user_form')+1)" value="+">
+        </label>
+    </li>
+    <div id="remove_user"></div>
+    <input type="button" class="kidzz_button" value="go !" onclick="start_game()">
+
+</div>
+<div id="game" class="large_game_div" style="display: none">
+    <div id="player_in_game_list" class=" droptarget kidzz_div"></div>
+    <div id="question" class="kidzz_div"></div>
+    <div id="reponse" class="answer_div"></div>
+    <div id="explication" class="kidzz_div"></div>
+    <input type="button" value="valider le tour" onclick="valid_turn()">
+</div>
+<div id="end_game"  class="large_game_div"  style="display: none">
+    <div id="player_list_end_game">
+    </div>
+    <form action="index.php" method="post">
+        <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
+            <input class="" type="checkbox" id="favoris" name="favoris" >
+            <span class="">ajouter au favoris</span>
+        </label>
+
+
+    </form>
+    <form action="index.php" method="post">
+        <input type="text" name="motif" required>
+    </form>
+
+    <form action="index.php" method="post">
+        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+    </form>
+</div>
 
 </body>
 

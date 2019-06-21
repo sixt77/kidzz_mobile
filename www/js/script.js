@@ -117,21 +117,26 @@ function delete_user(){
 
 //lancement du jeux
 function start_game() {
-    player_list = get_player_list();
-    if(player_list !== null){
-        var incr = 0;
-        hide_class("game_div");
-        hide_class("large_game_div");
-        show_id("game");
-        remove_id("game_setup");
-        game_turn(incr);
+    if(typeof items !== 'undefined'){
+        player_list = get_player_list();
+        if(player_list !== null){
+            incr = 0;
+            hide_class("game_div");
+            hide_class("large_game_div");
+            show_id("game");
+            remove_id("game_setup");
+            game_turn();
+        }else{
+            show_snack_bar("il faut au moins un joueur !!");
+        }
     }else{
-        show_snack_bar("il faut au moins un joueur !!");
+        show_snack_bar("erreur, veuillez raffraichir vos données");
     }
 }
 
 //déroulement des tours
 function game_turn() {
+
     if(incr < items.length){
         display_player_list(player_list, "player_in_game_list");
         if(incr > 0){
@@ -145,6 +150,8 @@ function game_turn() {
     }else{
         end_game();
     }
+
+
 }
 
 //validation des tours

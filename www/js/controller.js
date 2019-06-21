@@ -135,7 +135,7 @@ function recuperation_session(){
     return formData;
 }
 
-    //gestion des kidzz
+//gestion des kidzz
 //affichage de la page de gestion des quizz
 function gestion_kidzz() {
     envoie_formulaire(recuperation_session(), gestion_kidzz_callback, 'manage_kidzz');
@@ -197,8 +197,8 @@ function modifie_kidzz_callback(response) {
 
 
 //jeux
-    //partie simple
-    //choix du kidzz dans les kidzz en ligne
+//partie simple
+//choix du kidzz dans les kidzz en ligne
 function recuperation_kidzz_en_ligne() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_en_ligne_callback, 'play_online_kidzz');
 }
@@ -213,7 +213,7 @@ function recuperation_kidzz_en_ligne_callback(response) {
     }
 }
 
-    //choix du kidzz dans les kidzz de l'utilisateur
+//choix du kidzz dans les kidzz de l'utilisateur
 function recuperation_mes_kidzz() {
     envoie_formulaire(recuperation_session(), recuperation_mes_kidzz_callback, 'play_my_kidzz');
 }
@@ -228,7 +228,7 @@ function recuperation_mes_kidzz_callback(response) {
     }
 }
 
-    //choix du kidzz dans les favoris de l'utilisateur
+//choix du kidzz dans les favoris de l'utilisateur
 function recuperation_kidzz_favoris() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_en_ligne_callback, 'play_favorite_kidzz');
 }
@@ -243,7 +243,7 @@ function recuperation_kidzz_favoris_callback(response) {
     }
 }
 
-    //lancement de la partie
+//lancement de la partie
 function choix_kidzz(id) {
     sessionStorage.setItem('id_kidzz', id);
     document.location.href="play_kidzz.html";
@@ -262,7 +262,7 @@ function preparation_jeux_callback(response) {
 }
 
 
-    //notation du kidzz
+//notation du kidzz
 
 
 ////////////////////////////////////////////////////////TEST//////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,18 +300,30 @@ function preparation_connexion_automatique() {
     }
 }
 
-//recuperation des données hors ligne
+//verification des données hors ligne
+function verification_kidzz_hors_ligne() {
+    envoie_formulaire(recuperation_session(), verification_kidzz_hors_ligne_callback, 'check_offline_kidzz');
+}
+function verification_kidzz_hors_ligne_callback(response) {
+    $local_data = JSON.parse(localStorage.getItem("kidzz_list"));
+    $data =  JSON.parse(response);
+    if($local_data == null || JSON.stringify($local_data) != JSON.stringify($data)){
+        recuperation_kidzz_hors_ligne();
+        localStorage.setItem("kidzz_list", JSON.stringify($data));
+    }else{
+        show_snack_bar("vos données sont déja a jour ! ");
+    }
+
+}
+
+//recuperation des données hors lignes
 function recuperation_kidzz_hors_ligne() {
-    console.log(sessionStorage.getItem('utilisateur'));
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {
-    response = JSON.parse(response);
-    if(JSON.stringify(response).length < 2000000){
-        localStorage.removeItem("kidzz");
-        localStorage.setItem("kidzz", JSON.stringify(response));
-        show_snack_bar("enregistrement ok");
-        console.log(JSON.parse(localStorage.getItem("kidzz")));
+    if(response.length < 2000000) {
+        localStorage.setItem('kidzz', response);
+        show_snack_bar("vos données on été mis a jour ! ");
     }else{
         show_snack_bar("pas assez d'espace de stockage");
     }
