@@ -136,7 +136,6 @@ function start_game() {
 
 //déroulement des tours
 function game_turn() {
-
     if(incr < items.length){
         display_player_list(player_list, "player_in_game_list");
         if(incr > 0){

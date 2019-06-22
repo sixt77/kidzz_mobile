@@ -8,7 +8,6 @@ function recuperation_hors_ligne_mes_kidzz() {
     response = [];
     loop = 0;
     for (var i = 0; i < local_kidzz.length; i++) {
-        console.log(local_kidzz[i]['info']['id']);
         if(kidzz_list.includes(local_kidzz[i]['info']['id'])){
             response[loop] = local_kidzz[i]['info'];
             loop++;
@@ -31,7 +30,6 @@ function recuperation_hors_ligne_kidzz_favoris() {
     response = [];
     loop = 0;
     for (var i = 0; i < local_kidzz.length; i++) {
-        console.log(local_kidzz[i]['info']['id']);
         if(kidzz_list.includes(local_kidzz[i]['info']['id'])){
             response[loop] = local_kidzz[i]['info'];
             loop++;
@@ -48,16 +46,21 @@ function recuperation_hors_ligne_kidzz_favoris() {
 }
 
 //jouer a un jeux hors ligne
-function preparation_hors_ligne_jeux(id) {
-    kidzz_list = JSON.parse(localStorage.getItem('kidzz'));
-    find = false;
-    loop = 0;
-    while(!find && loop < kidzz_list.length){
-        if(kidzz_list[loop]['info']['id'] == id){
-            items = kidzz_list[loop]['question'];
-            find = true;
+function preparation_hors_ligne_jeux() {
+    if(sessionStorage.getItem('id_kidzz')){
+        kidzz_list = JSON.parse(localStorage.getItem('kidzz'));
+        find = false;
+        loop = 0;
+        while(!find && loop < kidzz_list.length){
+            if(kidzz_list[loop]['info']['id'] == sessionStorage.getItem('id_kidzz')){
+                items = kidzz_list[loop]['question'];
+                find = true;
+            }
+            loop++;
         }
-        loop++;
+    }else{
+        show_snack_bar("erreur");
     }
+
 }
 

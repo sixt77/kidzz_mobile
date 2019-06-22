@@ -97,7 +97,6 @@ function connexion_automatique() {
 //connexion callback
 function connexion_callback(response) {
     response = JSON.parse(response);
-    console.log(response);
     if(response !== null && response[0] !== undefined){
         sessionStorage.setItem('utilisateur', JSON.stringify(response));
         localStorage.setItem('utilisateur', JSON.stringify(response));
@@ -215,9 +214,19 @@ function recuperation_kidzz_en_ligne_callback(response) {
 
 //choix du kidzz dans les kidzz de l'utilisateur
 function recuperation_mes_kidzz() {
-    envoie_formulaire(recuperation_session(), recuperation_mes_kidzz_callback, 'play_my_kidzz');
+    if(network){
+        console.log("mode en ligne");
+        recuperation_en_ligne_mes_kidzz()
+    }else{
+        console.log("mode hors ligne");
+        recuperation_hors_ligne_mes_kidzz()
+    }
 }
-function recuperation_mes_kidzz_callback(response) {
+
+function recuperation_en_ligne_mes_kidzz() {
+    envoie_formulaire(recuperation_session(), recuperation_en_ligne_mes_kidzz_callback, 'play_my_kidzz');
+}
+function recuperation_en_ligne_mes_kidzz_callback(response) {
     response = JSON.parse(response);
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
@@ -230,9 +239,19 @@ function recuperation_mes_kidzz_callback(response) {
 
 //choix du kidzz dans les favoris de l'utilisateur
 function recuperation_kidzz_favoris() {
-    envoie_formulaire(recuperation_session(), recuperation_kidzz_en_ligne_callback, 'play_favorite_kidzz');
+    if(network){
+        console.log("mode en ligne");
+        recuperation_en_ligne_kidzz_favoris()
+    }else{
+        console.log("mode hors ligne");
+        recuperation_hors_ligne_kidzz_favoris()
+    }
 }
-function recuperation_kidzz_favoris_callback(response) {
+
+function recuperation_en_ligne_kidzz_favoris() {
+    envoie_formulaire(recuperation_session(), recuperation_en_ligne_kidzz_favoris_callback, 'play_favorite_kidzz');
+}
+function recuperation_en_ligne_kidzz_favoris_callback(response) {
     response = JSON.parse(response);
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
@@ -250,14 +269,24 @@ function choix_kidzz(id) {
 }
 
 function preparation_jeux() {
+    if(network){
+        console.log("mode en ligne");
+        preparation_en_ligne_jeux()
+    }else{
+        console.log("mode hors ligne");
+        preparation_hors_ligne_jeux()
+    }
+}
+
+function preparation_en_ligne_jeux() {
     if(sessionStorage.getItem('id_kidzz')){
-        envoie_formulaire(recuperation_session(), preparation_jeux_callback, 'play_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+        envoie_formulaire(recuperation_session(), preparation_en_ligne_jeux_callback, 'play_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
     }else{
         show_snack_bar("erreur");
     }
 }
 
-function preparation_jeux_callback(response) {
+function preparation_en_ligne_jeux_callback(response) {
     items =  JSON.parse(response)['question'];
 }
 
@@ -275,10 +304,12 @@ function verification_reseau() {
 }
 //mode hors ligne
 function mode_hors_ligne() {
+    network = false;
     show_snack_bar("hors ligne");
 }
 //mode en ligne
 function mode_en_ligne() {
+    network = true;
     show_snack_bar("en ligne");
 }
 
@@ -307,7 +338,7 @@ function verification_kidzz_hors_ligne() {
 function verification_kidzz_hors_ligne_callback(response) {
     $local_data = JSON.parse(localStorage.getItem("kidzz_list"));
     $data =  JSON.parse(response);
-    if($local_data == null || JSON.stringify($local_data) != JSON.stringify($data)){
+    if($local_data == null || JSON.stringify($local_data) != JSON.stringify($data) || JSON.parse(localStorage.getItem('kidzz')) == 'false'){
         recuperation_kidzz_hors_ligne();
         localStorage.setItem("kidzz_list", JSON.stringify($data));
     }else{
@@ -321,10 +352,20 @@ function recuperation_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {
-    if(response.length < 2000000) {
-        localStorage.setItem('kidzz', response);
-        show_snack_bar("vos données on été mis a jour ! ");
+    if(response != 'false'){
+        if(response.length < 2000000) {
+            localStorage.setItem('kidzz', response);
+            show_snack_bar("vos données on été mis a jour ! ");
+        }else{
+            show_snack_bar("pas assez d'espace de stockage");
+        }
     }else{
-        show_snack_bar("pas assez d'espace de stockage");
+        show_snack_bar("erreur");
     }
+
+}
+
+//lancement de la partie
+function test_choix_kidzz(id) {
+    sessionStorage.setItem('id_kidzz', id);
 }

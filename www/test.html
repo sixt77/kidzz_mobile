@@ -20,7 +20,7 @@
 
     <script>
         $( document ).ready(function() {
-
+            network = true;
         });
     </script>
     <div id="snackbar"></div>
@@ -32,10 +32,13 @@
 <input type="button" value="save" onclick="write_data('testarea1', 'test')">
 <input type="button" value="get" onclick="read_data('testarea2', 'test')">
 <input type="button" value="sync" onclick="verification_kidzz_hors_ligne()">
-<input type="button" value="mes kidzz" onclick="recuperation_hors_ligne_mes_kidzz()">
-<input type="button" value="mes favoris" onclick="recuperation_hors_ligne_kidzz_favoris()">
+<input type="button" value="mes kidzz" onclick="recuperation_mes_kidzz()">
+<input type="button" value="mes favoris" onclick="recuperation_kidzz_favoris()">
+<input type="button" value="mode en ligne" onclick="mode_en_ligne()">
+<input type="button" value="mode hors ligne" onclick="mode_hors_ligne()">
+<input type="button" value="check network" onclick="console.log(network)">
 <input type="text" id="test_input">
-<input type="button" value="preparer jeux" onclick="preparation_hors_ligne_jeux(document.getElementById('test_input').value)">
+<input type="button" value="preparer jeux" onclick="test_choix_kidzz(document.getElementById('test_input').value);preparation_jeux()">
 <div id="play_my_kidzz" class="">
     <div id="kidzz_list">
         <input type="text" id="search_bar" class="" onchange="sort_kidzz(this.value, kidzz, 'kidzz_div_list')" placeholder="Recherche..">
