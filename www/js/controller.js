@@ -34,6 +34,18 @@ function  add_class_by_class(class1, class2) {
     $( "."+class1+"" ).addClass(class2);
 }
 
+function remove_class_by_class(class1, class2) {
+    $( "."+class1+"" ).removeClass(class2);
+}
+
+function  enable_by_class(class1) {
+    $( "."+class1+"" ).prop( "disabled", true );
+}
+
+function disable_by_class(class1) {
+    $( "."+class1+"" ).prop( "disabled", false );
+}
+
 function remove_class_by_id(id, class1) {
     $( "#"+id+"" ).removeClass(class1);
 }
@@ -304,11 +316,13 @@ function verification_reseau() {
 }
 //mode hors ligne
 function mode_hors_ligne() {
+    enable_by_class("disable_offline");
     network = false;
     show_snack_bar("hors ligne");
 }
 //mode en ligne
 function mode_en_ligne() {
+    disable_by_class("disable_offline");
     network = true;
     show_snack_bar("en ligne");
 }
