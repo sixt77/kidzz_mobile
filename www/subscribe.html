@@ -21,23 +21,23 @@
     <script>
         $( document ).ready(function() {
             verification_reseau();
-            connexion_automatique();
-            affichage_login();
         });
     </script>
     <div id="snackbar"></div>
 </head>
 
 <body>
-<div id="login" style="display: none">
-    <input type="text" placeholder="id" id="id_field">
-    <input type="password" placeholder="password" id="password_field">
-    <input type="submit" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
-    <a href="subscribe.html"><input type="button" class="disable_offline" value="s'inscrire"></a>
+<div id="subscribe">
+    <form id="subscribe_form" method="post">
+        <input type="text" placeholder="nom" name="nom" id="last_name_field" required>
+        <input type="text" placeholder="prenom" name="prenom" id="first_name_field" required>
+        <input type="text" placeholder="email" name="email" id="email_field" required>
+        <input type="password" placeholder="mot de passe" name="motDePasse" id="password_field" required>
+        <input type="button" class="disable_offline" onclick="inscription('subscribe_form')">
+    </form>
 </div>
 
-<a href="test.html"><input type="button" value="test"></a>
-
+<a href="index.html"><input type="button" class="disable_offline" value="se connecter"></a>
 </body>
 
 </html>

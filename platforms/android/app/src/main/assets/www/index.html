@@ -20,19 +20,24 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script>
         $( document ).ready(function() {
-            preparation_connexion_automatique();
+            verification_reseau();
+            connexion_automatique();
+            affichage_login();
         });
     </script>
     <div id="snackbar"></div>
 </head>
 
 <body>
-<div id="login">
+<div id="login" style="display: none">
     <input type="text" placeholder="id" id="id_field">
     <input type="password" placeholder="password" id="password_field">
     <input type="submit" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
+    <a href="subscribe.html"><input type="button" class="disable_offline" value="s'inscrire"></a>
 </div>
 
 <a href="test.html"><input type="button" value="test"></a>
+
 </body>
+
 </html>

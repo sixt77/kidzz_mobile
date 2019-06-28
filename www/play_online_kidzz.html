@@ -20,8 +20,8 @@
 
     <script>
         $( document ).ready(function() {
-            verification_connexion();
             verification_reseau();
+            verification_connexion();
             recuperation_kidzz_en_ligne();
         });
     </script>
@@ -38,4 +38,11 @@
 
 
 </body>
+<footer>
+    <div id="nav_bar">
+        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
+        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
+    </div>
+</footer>
 </html>

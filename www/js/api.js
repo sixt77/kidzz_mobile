@@ -1,3 +1,4 @@
+var host = "http://os-vps418.infomaniak.ch/etu_info/amsb1/TEST/index.php/";
 ////////////////////////////////////////////////////////toolbox//////////////////////////////////////////////////////////////////////////////////////////////
 //fonction générique d'envoie de formulaire
 function envoie_formulaire(formdata, success, action, parameters) {
@@ -15,7 +16,7 @@ function envoie_formulaire(formdata, success, action, parameters) {
     }
 }
 ////////////////////////////////////////////////////////application//////////////////////////////////////////////////////////////////////////////////////////////
-var host = "http://os-vps418.infomaniak.ch/etu_info/amsb1/TEST/index.php/";
+
 //gestion des utilisateurs
 //fonction d'identification
 function identification(identifiant, password, success){

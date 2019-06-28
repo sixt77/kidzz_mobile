@@ -144,26 +144,27 @@ function game_turn() {
         }
         document.getElementById("question").appendChild(create_element("div", "question_"+incr, "question_div", "", items[incr]['info']['valeur']));
         for(i = 0; i < items[incr]['answer'].length; i++) {
-            document.getElementById("reponse").appendChild(create_element("div", "question_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "", items[incr]['answer'][i]['valeur']));
+            document.getElementById("reponse").appendChild(create_element("div", "answer_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "move_player("+i+")", items[incr]['answer'][i]['valeur']));
         }
     }else{
         end_game();
     }
-
-
 }
 
 //validation des tours
 function valid_turn() {
     if(count_class("explication_div")===0){
+        hide_id('reponse');
+        show_id('explication');
         document.getElementById("explication").appendChild(create_element("div", incr, "explication_div", "", items[incr]['info']['explication']));
         count_point();
     }else{
         remove_class("explication_div");
+        hide_id('explication');
+        show_id('reponse');
         incr++;
         game_turn(incr);
     }
-
 }
 
 //verifie les réponse et ajoute les point
@@ -182,6 +183,20 @@ function count_point(){
 }
 
 //deplacement des joueurs
+//click
+function select_player(id){
+    remove_class_by_class('joueur_div', 'selected');
+    add_class_by_id('joueur_'+id, 'selected');
+}
+
+function move_player(id){
+    player = document.getElementsByClassName('selected');
+    for(var i = 0; i < player.length; i++){
+        document.getElementById('answer_'+id).append(player[i]);
+    }
+}
+
+//drag&drop
 /* Events fired on the drag target */
 document.ondragstart = function() {
     event.dataTransfer.setData("Text", event.target.id);
@@ -207,6 +222,15 @@ function end_game() {
     hide_class("game_div");
     hide_class("large_game_div");
     show_id("end_game");
+    if(kidzz['note_utilisateur'] == 5){
+        document.getElementById("rate+").checked = true;
+    }else if(kidzz['note_utilisateur'] == 0){
+        document.getElementById("rate-").checked = true;
+    }
+    if(kidzz['favoris'] == true){
+        document.getElementById('favorite_checkbox').checked = true;
+    }
+    console.log(kidzz);
     player_list.sort(function(a, b){return b[1] - a[1]});
     display_player_list_with_score(player_list, "player_list_end_game");
 
@@ -235,8 +259,9 @@ function get_player_list() {
 //affichage des joueurs
 function display_player_list(player_list, div) {
     remove_class("joueur_div");
+    console.log(player_list);
     for(var i in player_list){
-        document.getElementById(div).appendChild(create_element("div", "joueur_"+i, "joueur_div", "", player_list[i][0]));
+        document.getElementById(div).appendChild(create_element("div", "joueur_"+i, "joueur_div", "select_player("+i+")", player_list[i][0]));
     }
     player_div = document.getElementsByClassName("joueur_div");
     for(var j in player_div){

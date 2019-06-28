@@ -20,8 +20,8 @@
 
     <script>
         $( document ).ready(function() {
-            verification_connexion();
             verification_reseau();
+            verification_connexion();
             edition_kidzz();
         });
     </script>
@@ -60,7 +60,14 @@
 
 
     </li>
-    <input type="button" value="valider" onclick="modifie_kidzz('question_form')">
+    <input type="button" value="valider"  class="disable_offline" onclick="modifie_kidzz('question_form')">
 </div>
-<a href="home.html" ><button type="button" class=""  name="home" value="">accueil</button></a>
 </body>
+<footer>
+    <div id="nav_bar">
+        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
+        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
+    </div>
+</footer>
+</html>

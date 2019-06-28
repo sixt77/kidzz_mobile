@@ -30,6 +30,10 @@ function create_button($id, $class, $value, $onclick){
     return item;
 }
 
+function  add_class_by_id(id, classe) {
+    $( "#"+id+"" ).addClass(classe);
+}
+
 function  add_class_by_class(class1, class2) {
     $( "."+class1+"" ).addClass(class2);
 }
@@ -95,15 +99,25 @@ function recuperation_formulaire(id) {
 
 
 //gestion de la session (connexion déconnexion)
+//affichage formulaire login
+function affichage_login() {
+    if(localStorage.getItem("utilisateur") == null){
+        document.getElementById('login').style.display = 'block';
+    }
+
+}
+
 //connexion
 function connexion(login, password) {
     identification(login, password, connexion_callback);
 }
 
-//connexion
+//connexion automatique
 function connexion_automatique() {
-    var utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
-    identification_automatique(utilisateur[1], utilisateur[2], connexion_callback);
+    if(localStorage.getItem("utilisateur") != null) {
+        var utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+        identification_automatique(utilisateur[1], utilisateur[2], connexion_callback);
+    }
 }
 
 //connexion callback
@@ -119,6 +133,22 @@ function connexion_callback(response) {
         localStorage.removeItem('utilisateur');
     }
 
+}
+
+//incription
+function inscription(id) {
+    envoie_formulaire(recuperation_formulaire(id), inscription_callback, 'subscribe');
+}
+
+//inscription callback
+function inscription_callback(response) {
+    if(response !== null && response[0] !== undefined && JSON.parse(response) != false){
+        sessionStorage.setItem('utilisateur', JSON.stringify(response));
+        localStorage.setItem('utilisateur', JSON.stringify(response));
+        document.location.href="home.html";
+    }else{
+        show_snack_bar("erreur");
+    }
 }
 //déconnexion
 function deconnexion() {
@@ -169,14 +199,24 @@ function creer_kidzz(id) {
 }
 
 function creer_kidzz_callback(response) {
-    document.location.href="manage_kidzz.html";
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        document.location.href="manage_kidzz.html";
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
 }
 //suppression de kidzz (kidzz + questions + reponses)
 function supprime_kidzz(id) {
     envoie_formulaire(recuperation_session(), supprime_kidzz_callback, 'delete_kidzz', '&id_kidzz='+id);
 }
 function supprime_kidzz_callback(response) {
-    document.location.href="manage_kidzz.html";
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        document.location.href="manage_kidzz.html";
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
 }
 //formulaire de modification de kidzz
 function preparation_edition_kidzz(id) {
@@ -199,10 +239,21 @@ function modifie_kidzz(id) {
 }
 
 function modifie_kidzz_callback(response) {
-    console.log(response);
-    //document.location.href="manage_kidzz.html";
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        document.location.href="manage_kidzz.html";
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
 }
 
+//affichage des réponses
+function verification_message() {
+    if(sessionStorage.getItem('message')) {
+        show_snack_bar(sessionStorage.getItem('message'));
+        sessionStorage.removeItem('message');
+    }
+}
 
 
 
@@ -226,12 +277,13 @@ function recuperation_kidzz_en_ligne_callback(response) {
 
 //choix du kidzz dans les kidzz de l'utilisateur
 function recuperation_mes_kidzz() {
-    if(network){
+    console.log(network);
+    if(network == true){
         console.log("mode en ligne");
-        recuperation_en_ligne_mes_kidzz()
+        recuperation_en_ligne_mes_kidzz();
     }else{
         console.log("mode hors ligne");
-        recuperation_hors_ligne_mes_kidzz()
+        recuperation_hors_ligne_mes_kidzz();
     }
 }
 
@@ -249,14 +301,37 @@ function recuperation_en_ligne_mes_kidzz_callback(response) {
     }
 }
 
+//mode hors ligne
+//recuperation des mes kidzz
+function recuperation_hors_ligne_mes_kidzz() {
+    kidzz_list =JSON.parse(localStorage.getItem('kidzz_list'))['user_kidzz_list'];
+    local_kidzz = JSON.parse(localStorage.getItem('kidzz'));
+    response = [];
+    loop = 0;
+    for (var i = 0; i < local_kidzz.length; i++) {
+        if(kidzz_list.includes(local_kidzz[i]['info']['id'])){
+            response[loop] = local_kidzz[i]['info'];
+            loop++;
+        }
+    }
+
+    for (var i = 0; i < response.length; i++) {
+        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+    }
+}
+
 //choix du kidzz dans les favoris de l'utilisateur
 function recuperation_kidzz_favoris() {
-    if(network){
+    if(network == true){
         console.log("mode en ligne");
-        recuperation_en_ligne_kidzz_favoris()
+        recuperation_en_ligne_kidzz_favoris();
     }else{
         console.log("mode hors ligne");
-        recuperation_hors_ligne_kidzz_favoris()
+        recuperation_hors_ligne_kidzz_favoris();
     }
 }
 
@@ -265,6 +340,29 @@ function recuperation_en_ligne_kidzz_favoris() {
 }
 function recuperation_en_ligne_kidzz_favoris_callback(response) {
     response = JSON.parse(response);
+    for (var i = 0; i < response.length; i++) {
+        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+    }
+}
+
+//mode hors ligne
+//recuperation de mes favoris
+function recuperation_hors_ligne_kidzz_favoris() {
+    kidzz_list =JSON.parse(localStorage.getItem('kidzz_list'))['user_favorite_list'];
+    local_kidzz = JSON.parse(localStorage.getItem('kidzz'));
+    response = [];
+    loop = 0;
+    for (var i = 0; i < local_kidzz.length; i++) {
+        if(kidzz_list.includes(local_kidzz[i]['info']['id'])){
+            response[loop] = local_kidzz[i]['info'];
+            loop++;
+        }
+    }
+
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
         document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
@@ -283,11 +381,12 @@ function choix_kidzz(id) {
 function preparation_jeux() {
     if(network){
         console.log("mode en ligne");
-        preparation_en_ligne_jeux()
+        preparation_en_ligne_jeux();
     }else{
         console.log("mode hors ligne");
-        preparation_hors_ligne_jeux()
+        preparation_hors_ligne_jeux();
     }
+
 }
 
 function preparation_en_ligne_jeux() {
@@ -300,49 +399,74 @@ function preparation_en_ligne_jeux() {
 
 function preparation_en_ligne_jeux_callback(response) {
     items =  JSON.parse(response)['question'];
+    kidzz = JSON.parse(response)['info'];
+    kidzz['note'] = JSON.parse(response)['note'];
+    kidzz['note_utilisateur'] = JSON.parse(response)['note_utilisateur'];
+    kidzz['favoris'] = JSON.parse(response)['favoris'];
+}
+
+//mode hors ligne
+//jouer a un jeux hors ligne
+function preparation_hors_ligne_jeux() {
+    if(sessionStorage.getItem('id_kidzz')){
+        kidzz_list = JSON.parse(localStorage.getItem('kidzz'));
+        find = false;
+        loop = 0;
+        while(!find && loop < kidzz_list.length){
+            if(kidzz_list[loop]['info']['id'] == sessionStorage.getItem('id_kidzz')){
+                items = kidzz_list[loop]['question'];
+                find = true;
+            }
+            loop++;
+        }
+    }else{
+        show_snack_bar("erreur");
+    }
+
 }
 
 
+
 //notation du kidzz
+function noter_kidzz(id) {
+    envoie_formulaire(recuperation_formulaire(id), noter_kidzz_callback, 'rate_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+}
 
+function noter_kidzz_callback(response) {
+    console.log(response);
+}
 
-////////////////////////////////////////////////////////TEST//////////////////////////////////////////////////////////////////////////////////////////////
+function reporter_kidzz(id) {
+    envoie_formulaire(recuperation_formulaire(id), noter_kidzz_callback, 'report_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+}
 
 //mode hors ligne
 //verification
 function verification_reseau() {
+    if(sessionStorage.getItem('network') == 'false'){
+        network = false;
+        mode_hors_ligne();
+    }else if(sessionStorage.getItem('network') == 'true'){
+        network = true;
+        mode_en_ligne();
+    }
     document.addEventListener("offline", mode_hors_ligne, false);
     document.addEventListener("online", mode_en_ligne, false);
 }
-//mode hors ligne
-function mode_hors_ligne() {
-    enable_by_class("disable_offline");
-    network = false;
-    show_snack_bar("hors ligne");
-}
+
 //mode en ligne
 function mode_en_ligne() {
+    sessionStorage.setItem('network', 'true');
     disable_by_class("disable_offline");
     network = true;
-    show_snack_bar("en ligne");
 }
 
 
-//sauvegarde
-function read_data(id, key) {
-    document.getElementById(id).value = window.localStorage.getItem(key);
-}
-
-function write_data(id, key) {
-    window.localStorage.setItem(key, document.getElementById(id).value);
-}
-
-
-//connexion automatique
-function preparation_connexion_automatique() {
-    if(localStorage.getItem("utilisateur") != null){
-        connexion_automatique();
-    }
+//mode hors ligne
+function mode_hors_ligne() {
+    sessionStorage.setItem('network', 'false');
+    enable_by_class("disable_offline");
+    network = false;
 }
 
 //verification des données hors ligne
@@ -378,6 +502,11 @@ function recuperation_kidzz_hors_ligne_callback(response) {
     }
 
 }
+
+
+
+
+////////////////////////////////////////////////////////TEST//////////////////////////////////////////////////////////////////////////////////////////////
 
 //lancement de la partie
 function test_choix_kidzz(id) {

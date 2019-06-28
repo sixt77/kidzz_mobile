@@ -21,8 +21,9 @@
     <script>
         var incr = 0;
         $( document ).ready(function() {
-            verification_connexion();
             verification_reseau();
+            verification_connexion();
+
         });
     </script>
 
@@ -85,11 +86,18 @@
         <span>partagé :</span>
         <input type="checkbox" name="share" checked>
     </li>
-    <input class="" type="button" onclick="creer_kidzz('question_form')" value="valider">
+    <input class="" type="button"  class="disable_offline" onclick="creer_kidzz('question_form')" value="valider">
     </form>
 
 
 </div>
-<a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+
 </body>
+<footer>
+    <div id="nav_bar">
+        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
+        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
+        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
+    </div>
+</footer>
 </html>
