@@ -29,20 +29,30 @@
     <div id="snackbar"></div>
 </head>
 <body>
-<div id="play_my_kidzz" class="">
-    <div id="kidzz_list">
-        <input type="text" id="search_bar" class="" onchange="sort_kidzz(this.value, kidzz, 'kidzz_div_list')" placeholder="Recherche..">
+<div id="kidzz_selection" class="container-main">
+    <div class="container-title">
+        <h2>Kidzz</h2>
+        <form class="container-form-button" action="index.php" method="post">
+            <input type="button" class="init-button" value="X" onclick="deconnexion()">
+        </form>
     </div>
+
+    <div>
+        <input type="text" id="search_bar" class="searchBar" onchange="sort_kidzz(this.value, kidzz, 'kidzz_div_list')" placeholder="Recherche..">
+
+        <div  id="kidzz_list" class="scroll-list-kidzz">
+
+        </div>
+    </div>
+</div>
+<div class="container-menu">
+    <a href="home.html"><input type="button" class="init-button" value="H"></a>
+    <input type="button" value="sync" class="init-button disable_offline" onclick="verification_kidzz_hors_ligne()">
+
 </div>
 
 
 
+
 </body>
-<footer>
-    <div id="nav_bar">
-        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
-        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
-        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
-    </div>
-</footer>
 </html>

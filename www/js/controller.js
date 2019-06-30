@@ -116,8 +116,10 @@ function connexion(login, password) {
 //connexion automatique
 function connexion_automatique() {
     if(localStorage.getItem("utilisateur") != null) {
-        var utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
-        identification_automatique(utilisateur[1], utilisateur[2], connexion_callback);
+        sessionStorage.setItem('utilisateur', localStorage.getItem("utilisateur"));
+        document.location.href="home.html";
+        //var utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+        //identification_automatique(utilisateur[1], utilisateur[2], connexion_callback);
     }
 }
 
@@ -186,11 +188,11 @@ function gestion_kidzz_callback(response) {
     response = JSON.parse(response);
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','-', 'supprime_kidzz('+response[i]['id']+')'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','e', 'preparation_edition_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('button-edit_'+i,'init-button button-edit','e', 'preparation_edition_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('id_button_del_'+i,'init-button button-del','-', 'supprime_kidzz('+response[i]['id']+')'));
     }
 }
 
@@ -267,13 +269,20 @@ function recuperation_kidzz_en_ligne() {
 }
 function recuperation_kidzz_en_ligne_callback(response) {
     response = JSON.parse(response);
-    for (var i = 0; i < response.length; i++) {
-        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+    if(response[0] == true){
+        response = response[1];
+        kidzz = response;
+        for (var i = 0; i < response.length; i++) {
+            document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
+            document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
+            document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('id_button_play_'+i,'init-button button-play','play', 'choix_kidzz('+response[i]['id']+')'));
+            document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
+            document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
+        }
+    }else{
+        show_snack_bar(response[1]);
     }
+
 }
 
 //choix du kidzz dans les kidzz de l'utilisateur
@@ -293,12 +302,18 @@ function recuperation_en_ligne_mes_kidzz() {
 }
 function recuperation_en_ligne_mes_kidzz_callback(response) {
     response = JSON.parse(response);
-    for (var i = 0; i < response.length; i++) {
-        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+    if(response[0] == true){
+        response = response[1];
+        kidzz = response;
+        for (var i = 0; i < response.length; i++) {
+            document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_button('id_button_play_' + i, 'init-button button-play', 'play', 'choix_kidzz(' + response[i]['id'] + ')'));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_' + i, 'kidzz_div_list_item kidzz_div_list_item_note', '', response[i]['note']));
+        }
+    }else{
+        show_snack_bar(response[1]);
     }
 }
 
@@ -315,13 +330,13 @@ function recuperation_hors_ligne_mes_kidzz() {
             loop++;
         }
     }
-
+    kidzz = response;
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('id_button_play_'+i,'init-button button-play','play', 'choix_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
     }
 }
 
@@ -341,12 +356,18 @@ function recuperation_en_ligne_kidzz_favoris() {
 }
 function recuperation_en_ligne_kidzz_favoris_callback(response) {
     response = JSON.parse(response);
-    for (var i = 0; i < response.length; i++) {
-        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+    if(response[0] == true){
+        response = response[1];
+        kidzz = response;
+        for (var i = 0; i < response.length; i++) {
+            document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_button('id_button_play_' + i, 'init-button button-play', 'play', 'choix_kidzz(' + response[i]['id'] + ')'));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_' + i, 'kidzz_div_list_item kidzz_div_list_item_note', '', response[i]['note']));
+        }
+    }else{
+        show_snack_bar(response[1]);
     }
 }
 
@@ -363,13 +384,13 @@ function recuperation_hors_ligne_kidzz_favoris() {
             loop++;
         }
     }
-
+    kidzz = response;
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['nom']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['description']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', '','','', response[i]['note']));
-        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('','','play', 'choix_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_button('id_button_play_'+i,'init-button button-play','play', 'choix_kidzz('+response[i]['id']+')'));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
+        document.getElementById('kidzz_'+response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
     }
 }
 
@@ -399,11 +420,18 @@ function preparation_en_ligne_jeux() {
 }
 
 function preparation_en_ligne_jeux_callback(response) {
-    items =  JSON.parse(response)['question'];
-    kidzz = JSON.parse(response)['info'];
-    kidzz['note'] = JSON.parse(response)['note'];
-    kidzz['note_utilisateur'] = JSON.parse(response)['note_utilisateur'];
-    kidzz['favoris'] = JSON.parse(response)['favoris'];
+    response = JSON.parse(response);
+    if(response[0] == true){
+        response = response[1];
+        items =  response['question'];
+        kidzz = response['info'];
+        kidzz['note'] = response['note'];
+        kidzz['note_utilisateur'] = response['note_utilisateur'];
+        kidzz['favoris'] = response['favoris'];
+    }else{
+        show_snack_bar(response[1]);
+    }
+
 }
 
 //mode hors ligne
@@ -475,15 +503,19 @@ function verification_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), verification_kidzz_hors_ligne_callback, 'check_offline_kidzz');
 }
 function verification_kidzz_hors_ligne_callback(response) {
-    $local_data = JSON.parse(localStorage.getItem("kidzz_list"));
-    $data =  JSON.parse(response);
-    if($local_data == null || JSON.stringify($local_data) != JSON.stringify($data) || JSON.parse(localStorage.getItem('kidzz')) == 'false'){
-        recuperation_kidzz_hors_ligne();
-        localStorage.setItem("kidzz_list", JSON.stringify($data));
+    response = JSON.parse(response);
+    if(response[0] == true){
+        $local_data = JSON.parse(localStorage.getItem("kidzz_list"));
+        $data =  response[1];
+        if($local_data == null || JSON.stringify($local_data) != JSON.stringify($data) || JSON.parse(localStorage.getItem('kidzz')) == 'false'){
+            recuperation_kidzz_hors_ligne();
+            localStorage.setItem("kidzz_list", JSON.stringify($data));
+        }else{
+            show_snack_bar("vos données sont déja a jour ! ");
+        }
     }else{
-        show_snack_bar("vos données sont déja a jour ! ");
+        show_snack_bar(response[1]);
     }
-
 }
 
 //recuperation des données hors lignes
@@ -491,15 +523,16 @@ function recuperation_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {
-    if(response != 'false'){
+    response = JSON.parse(response);
+    if(response[0] == true){
         if(response.length < 2000000) {
-            localStorage.setItem('kidzz', response);
+            localStorage.setItem('kidzz', JSON.stringify(response[1]));
             show_snack_bar("vos données on été mis a jour ! ");
         }else{
             show_snack_bar("pas assez d'espace de stockage");
         }
     }else{
-        show_snack_bar("erreur");
+        show_snack_bar(response[1]);
     }
 
 }

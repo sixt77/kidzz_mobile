@@ -281,16 +281,17 @@ function display_player_list_with_score(player_list, div) {
 //trie des kidzz
 function sort_kidzz(str, array, classe) {
     var j = 0;
+    console.log(array);
     var array2 = new Array();
     for(var i in array){
-        if(array[i][1].toLowerCase().includes(str.toLowerCase())||array[i][2].toLowerCase().includes(str.toLowerCase())){
+        if(array[i]['nom'].toLowerCase().includes(str.toLowerCase())||array[i]['description'].toLowerCase().includes(str.toLowerCase())){
             array2[j] = array[i];
             j++;
         }
     }
     add_class_by_class(classe, "hide_by_text");
-    for(var i in array2){
-        remove_class_by_id('kidzz_'+array2[i][0], "hide_by_text");
+    for(var z in array2){
+        remove_class_by_id('kidzz_'+array2[z]['id'], "hide_by_text");
 
     }
 }

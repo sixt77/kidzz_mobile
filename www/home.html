@@ -32,9 +32,7 @@
     <div class="container-title">
         <h2>Kidzz</h2>
         <form class="container-form-button" action="index.php" method="post">
-            <button type="submit" class="init-button" id="buttonLogout"  name="logout" value="">
-                <i class="fas fa-power-off"></i>
-            </button>
+            <input type="button" class="init-button" value="X" onclick="deconnexion()">
         </form>
     </div>
     <div class="scroll">
@@ -42,13 +40,11 @@
         <a href="play_my_kidzz.html"><button type="button" class="button button-modeSelec button-menu-myKidzz"  name="play_my_kidzz" value="">mes kidzz !</button></a>
         <a href="play_favorite_kidzz.html"><button type="button" class="button button-modeSelec button-menu-favorite" name="play_favorite_kidzz" value="">favoris</button></a>
         <a href="manage_kidzz.html" ><button type="button"  class="button button-menu-manage disable_offline" name="manage_kidzz" value="">gerez mes kidzz !</button></a>
-        <input type="button" class=""  name="logout" value="déconnexion" onclick="deconnexion()">
     </div>
 </div>
 <div class="container-menu">
-    <a href="home.html"><button type="button" class="init-button" value=""><i class="fas fa-home"></i></button></a>
+    <a href="home.html"><input type="button" class="init-button" value="H"></a>
     <input type="button" value="sync" class="init-button disable_offline" onclick="verification_kidzz_hors_ligne()">
-
 </div>
 </body>
 
