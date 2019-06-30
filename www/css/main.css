@@ -1,11 +1,297 @@
+/*******************************
+            GÉNÉRAL
+********************************/
+
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', 'PT Sans', sans-serif;
     font-size: 15px;
 }
-li{
+
+li {
     list-style: none;
 }
-.kidzz_input{
+
+.searchBar {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 30px;
+    border: 0;
+}
+
+#manage_kidzz .searchBar {
+    width: 80%;
+}
+
+.disabled {
+    display: none;
+}
+
+/*******************************
+            CONTAINER
+********************************/
+
+
+.home-container {
+    padding-top: 30px;
+    background-color: #7aa57d;
+}
+
+.home-container-log {
+    margin-left: 0;
+    height: 300px;
+    padding: 25px 20px 15px 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.36);
+    overflow: scroll;
+}
+
+.container-main {
+    height: calc(100vh - 60px);
+    background-color: #cfead1;
+}
+
+.container-title {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    background-color: #79A57C;
+}
+
+.container-menu {
+    width: 100%;
+    display: flex;
+    padding: 15px 20px;
+    justify-content: space-around;
+    background-color: #b5794f;
+}
+
+.container-form-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: calc(100vh - 115px);
+}
+
+.scroll-list-kidzz {
+    overflow-y: scroll;
+    height: calc(100vh - 190px);
+    padding: 40px 20px 0;
+}
+
+/*******************************
+            TITLE
+********************************/
+
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+    height: calc(100vh - 330px);
+    font-family: 'Comfortaa', sans-serif;
+}
+
+h2 {
+    font-size: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+
+/*******************************
+            INPUT
+********************************/
+
+
+.input-log {
+    font-size: 24px;
+    width: 100%;
+    height: 40px;
+    padding: 3px 6px;
+    border: 1px solid #ddd;
+    color: #32373c;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+
+/*******************************
+            BUTTON
+********************************/
+
+
+.init-button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.button-log {
+    margin: 15px auto 0;
+    border: 1px solid #D5211D;
+    border-radius: 3px;
+    font-family: "Roboto",sans-serif;
+    font-size: 20px;
+    display: block;
+    padding: 5px 15px;
+    color: #FFF;
+    cursor: pointer;
+    background-color: #f73f3f;
+    text-shadow: 0 -1px 1px #D52114, 1px 0 1px #D52114, 0 1px 1px #D52114, -1px 0 1px #D52114;
+    box-shadow: 0 1px 0 #D52114;
+}
+
+.button {
+    width: 100%;
+    padding: 60px 0;
+    font-size: 40px;
+    box-shadow: inset 0 5px 5px -5px;
+    border: 0;
+}
+
+.button-manage-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-form-manage-plus {
+    width: 20%;
+    height: 60px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: burlywood;
+}
+
+.button-play {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.button-del {width: 100%;margin: 10px 0;}
+
+.button-edit {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.button-menu-play {
+    background-color: rgba(26, 138, 38, 0.96);
+}
+
+.button-menu-manage {
+    background-color: #7da582;
+}
+
+.button-menu-online {
+    background-color: rgba(26, 138, 38, 0.96);
+}
+
+.button-menu-myKidzz {
+    background-color: #7da582;
+}
+
+.button-menu-favorite {
+    background-color: rgba(26, 138, 38, 0.96);
+}
+
+
+/*******************************
+            ICONES
+********************************/
+
+
+.fas {
+    font-size: 30px;
+}
+
+
+/*******************************
+            LABEL
+********************************/
+
+
+.label-log {
+    display: block;
+    margin-top: 20px;
+}
+
+
+.kidzz_div_list {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid;
+    margin-bottom: 50px;
+}
+
+.kidzz_div_list_item {
+}
+
+.kidzz_div_list_item_name {
+    width: calc(100% - 50px);
+    text-align: center;
+    font-size: 22px;
+    height: 50px;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kidzz_div_list_item_note {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.kidzz_div_list_item_description {
+    width: 100%;
+    min-height: 80px;
+    line-height: 18px;
+    font-size: 16px;
+    padding: 15px 10px;
+}
+
+
+
+
+
+
+
+
+.hide_by_text {
+    display: none;
+}
+
+.kidzz_input {
     font-size: 24px;
     width: 100%;
     height: 40px;
@@ -18,15 +304,17 @@ li{
     color: #32373c;
     border-radius: 5px;
 }
-.kidzz_input:focus{
+
+.kidzz_input:focus {
     border-color: #5b9dd9;
     box-shadow: 0 0 2px rgba(30,140,190,.8);
 }
-.kidzz_button{
+
+.kidzz_button {
     margin: 20px auto 0;
     border: 1px solid #D5211D;
     border-radius: 3px;
-    font-family: "Roboto";
+    font-family: "Roboto",sans-serif;
     font-size: 20px;
     display: block;
     padding: 5px 15px;
@@ -36,37 +324,42 @@ li{
     text-shadow: 0 -1px 1px #D52114, 1px 0 1px #D52114, 0 1px 1px #D52114, -1px 0 1px #D52114;
     min-width: 80px;
 }
-.user_form{
+
+.user_form {
     text-align: center;
 }
-.game_div{
+
+.game_div {
     width: 320px;
     margin: 0 auto;
 }
-.large_game_div{
+
+.large_game_div {
     width: 1000px;
     margin: 0 auto;
 }
 
-.reponse_div{
+.reponse_div {
     width: 400px;
     height: 100px;
     float: left;
     margin: 50px;
 }
-.reponse_div_1{
+
+.reponse_div_1 {
     background-color: #D5211D;
 }
-.reponse_div_2{
+.reponse_div_2 {
     background-color: #5b9dd9;
 }
-.reponse_div_3{
+.reponse_div_3 {
     background-color: chartreuse;
 }
-.reponse_div_4{
+.reponse_div_4 {
     background-color: darkorange;
 }
-.answer_div{
+
+.answer_div {
     width: 100%;
     border-style: double;
     border-color: black;
@@ -75,7 +368,8 @@ li{
     height: 400px;
     text-align: center;
 }
-.kidzz_div{
+
+.kidzz_div {
     width: 400px;
     height: 100px;
     border-style: double;
@@ -84,11 +378,25 @@ li{
     margin: auto;
     text-align: center;
 }
-.question_div{
+
+.question_div {
 
 }
 
 
-.hide_by_text{
-    display: none;
+/*******************************
+            MEDIA QUERIES
+********************************/
+
+
+@media screen and (min-width: 900px) {
+    .home-container {
+        width: 320px;
+        margin: 0 auto;
+        padding: 8% 0 0;
+    }
+
+    .home-container-log {
+        height: auto;
+    }
 }
