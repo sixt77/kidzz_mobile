@@ -109,6 +109,7 @@ function affichage_login() {
 
 //connexion
 function connexion(login, password) {
+    console.log(login, password);
     identification(login, password, connexion_callback);
 }
 

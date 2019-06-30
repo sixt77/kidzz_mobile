@@ -27,17 +27,38 @@
 </head>
 
 <body>
-<div id="subscribe">
-    <form id="subscribe_form" method="post">
-        <input type="text" placeholder="nom" name="nom" id="last_name_field" required>
-        <input type="text" placeholder="prenom" name="prenom" id="first_name_field" required>
-        <input type="text" placeholder="email" name="email" id="email_field" required>
-        <input type="password" placeholder="mot de passe" name="motDePasse" id="password_field" required>
-        <input type="button" class="disable_offline" onclick="inscription('subscribe_form')">
-    </form>
+<div id="signupForm" class="home-container">
+    <h1>Kidzz</h1>
+
+    <div class="home-container-log">
+        <form id="subscribe_form" method="post">
+            <label for="user_login">
+                Adresse mail
+                <input type="text" class="input-log" id="user_login" name="email" required>
+            </label>
+
+            <label for="user_last_name">
+                Nom
+                <input type="text" class="input-log" id="user_last_name" name="nom" required>
+            </label>
+
+            <label for="user_first_name">
+                Prénom
+                <input type="text" class="input-log" id="user_first_name" name="prenom" required>
+            </label>
+
+            <label for="user_pass">
+                Mot de passe
+                <input type='password' class="input-log" id="user_pass" name="motDePasse" required>
+            </label>
+            <input type="button" class="button-log disable_offline" id="butonSignup"  name="signup" onclick="inscription('subscribe_form')" value="Valider">
+            <a href="index.html"><button type="button" class="disable_offline" value="">se connecter</button></a>
+        </form>
+
+
+    </div>
 </div>
 
-<a href="index.html"><input type="button" class="disable_offline" value="se connecter"></a>
 </body>
 
 </html>

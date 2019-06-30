@@ -29,14 +29,21 @@
 </head>
 
 <body>
-<div id="login" style="display: none">
-    <input type="text" placeholder="id" id="id_field">
-    <input type="password" placeholder="password" id="password_field">
-    <input type="submit" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
-    <a href="subscribe.html"><input type="button" class="disable_offline" value="s'inscrire"></a>
+<div id="home" class="home-container">
+    <h1>Kidzz</h1>
+    <div id="login" class="home-container-log" style="display: none">
+        <label for="id_field">
+            Adresse mail
+            <input type="text" class="input-log" id="id_field" name="email" required>
+        </label>
+        <label for="password_field">
+            Mot de passe
+            <input type='password' class="input-log" id="password_field" name="motDePasse" required>
+        </label>
+        <button type="submit" class="button-log disable_offline" id="buttonSignin"  name="signin" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">S'identifier</button>
+        <a href="subscribe.html"><button class="button-log disable_offline" value="s'inscrire">S'inscrire</button></a>
+    </div>
 </div>
-
-<a href="test.html"><input type="button" value="test"></a>
 
 </body>
 

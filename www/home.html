@@ -28,19 +28,26 @@
     <div id="snackbar"></div>
 </head>
 <body>
-
-<div id="home">
-    <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
-    <a href="manage_kidzz.html" ><button type="button"  class="disable_offline" name="manage_kidzz" value="">gerez mes kidzz !</button></a>
-    <button type="button" class=""  name="logout" value="" onclick="deconnexion()">déconnexion</button>
-</div>
-
-</body>
-<footer>
-    <div id="nav_bar">
-        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
-        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
-        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
+<div id="home" class="container-main">
+    <div class="container-title">
+        <h2>Kidzz</h2>
+        <form class="container-form-button" action="index.php" method="post">
+            <button type="submit" class="init-button" id="buttonLogout"  name="logout" value="">
+                <i class="fas fa-power-off"></i>
+            </button>
+        </form>
     </div>
-</footer>
+    <div class="scroll">
+        <a href="mode_selection.html"><button type="button" class="button button-menu-play" name="play" value="">jouer !</button></a>
+        <a href="manage_kidzz.html" ><button type="button"  class="button button-menu-manage disable_offline" name="manage_kidzz" value="">gerez mes kidzz !</button></a>
+        <input type="button" class=""  name="logout" value="déconnexion" onclick="deconnexion()">
+    </div>
+</div>
+<div class="container-menu">
+    <a href="home.html"><button type="button" class="init-button" value=""><i class="fas fa-home"></i></button></a>
+    <input type="button" value="sync" class="init-button disable_offline" onclick="verification_kidzz_hors_ligne()">
+
+</div>
+</body>
+
 </html>
