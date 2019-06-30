@@ -230,10 +230,17 @@ function edition_kidzz() {
     envoie_formulaire(recuperation_session(), edition_kidzz_callback, 'edit_kidzz_form', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
 }
 function edition_kidzz_callback(response) {
-    var kidzz = JSON.parse(response)['info'];
-    fill_kidzz(kidzz);
-    items = JSON.parse(response)['question'];
-    fill_question("question_area");
+    response = JSON.parse(response);
+    if(response[0] == true){
+        response = response[1];
+        var kidzz = response['info'];
+        fill_kidzz(kidzz);
+        items = response['question'];
+        fill_question("question_area");
+    }else{
+        show_snack_bar(response[1]);
+    }
+
 }
 
 //modification de kidzz
@@ -462,12 +469,28 @@ function noter_kidzz(id) {
 }
 
 function noter_kidzz_callback(response) {
-    console.log(response);
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        document.location.href="home.html";
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
 }
 
+//report du kidzz
 function reporter_kidzz(id) {
-    envoie_formulaire(recuperation_formulaire(id), noter_kidzz_callback, 'report_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+    envoie_formulaire(recuperation_formulaire(id), reporter_kidzz_callback, 'report_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
 }
+
+function reporter_kidzz_callback(response) {
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        document.location.href="home.html";
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
+}
+
 
 //mode hors ligne
 //verification
