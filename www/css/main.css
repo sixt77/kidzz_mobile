@@ -157,6 +157,10 @@ h1 {
 ********************************/
 
 
+::-webkit-scrollbar {
+    display: none;  // Safari and Chrome
+}
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -211,6 +215,7 @@ li {
     background: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.36);
     overflow: scroll;
+    scrollbar-width: none;  // Firefox
 }
 
 .container-main {
@@ -242,12 +247,14 @@ li {
 .scroll {
     overflow-y: scroll;
     height: calc(100vh - 130px);
+    scrollbar-width: none;  // Firefox
 }
 
 .scroll-list-kidzz {
     overflow-y: scroll;
     height: calc(100vh - 190px);
     padding: 30px 20px 0;
+    scrollbar-width: none;  // Firefox
 }
 
 #create_kidzz .scroll,
@@ -255,6 +262,7 @@ li {
     height: calc(100vh - 130px);
     padding: 20px 20px 10px;
     font-size: 20px;
+    scrollbar-width: none;  // Firefox
 }
 
 
@@ -625,9 +633,9 @@ h2 {
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    text-transform: capitalize;
     flex-wrap: wrap;
     overflow: scroll;
+    scrollbar-width: none;  // Firefox
     padding: 15px 0px;
 }
 
@@ -667,6 +675,7 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     overflow: scroll;
+    scrollbar-width: none;  // Firefox
     padding: 10px 0;
 }
 
