@@ -60,6 +60,8 @@ function  enable_by_class(class1) {
 
 function disable_by_class(class1) {
     $( "."+class1+"" ).prop( "disabled", false );
+    $( "."+class1+"" ).disabled = true;
+
 }
 
 function remove_class_by_id(id, class1) {
@@ -522,6 +524,10 @@ function verification_reseau() {
 function mode_en_ligne() {
     sessionStorage.setItem('network', 'true');
     disable_by_class("disable_offline");
+    classe = document.getElementsByClassName("link_disable_offline");
+    for (var i in classe) {
+        classe[i].onclick = "";
+    }
     network = true;
 }
 
@@ -530,6 +536,10 @@ function mode_en_ligne() {
 function mode_hors_ligne() {
     sessionStorage.setItem('network', 'false');
     enable_by_class("disable_offline");
+    classe = document.getElementsByClassName("link_disable_offline");
+    for (var i in classe) {
+        classe[i].onclick = function() {return false;};
+    }
     network = false;
 }
 
