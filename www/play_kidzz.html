@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/6720557cce.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Alegreya|Courgette|Martel|Roboto|Comfortaa&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -31,58 +32,75 @@
 
 </head>
 <body>
-<div id="game_setup"  class="game_div">
-    <div id="player_list">
+    <div id="play_kidzz" class="container-main">
+        <div class="container-title">
+            <h2>Kidzz</h2>
 
-        <div id="user_area">
-            <li id="joueur_1" class="user_form">joueur 1 :<label id="form_label_1"></label><input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required">
-            </li>
+            <div class="container-form-button">
+                <i class="fas fa-power-off" onclick="deconnexion()"></i>
+            </div>
         </div>
 
+        <div id="game_setup"  class="game_div scroll">
+            <div id="player_list">
+                <div id="user_area">
+                    <div id="joueur_1" class="user_form">
+                        <span class="kidzz-title-joueur">Joueur 1 :</span>
+
+                        <input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="">
+                <label class="" for="addUser">
+                    <input id="addUser" class="kidzz_button" type="button" onclick="add_user('user_area', count_class('user_form')+1)" value="+">
+                </label>
+            </div>
+
+            <div id="remove_user"></div>
+
+            <input type="button" class="kidzz_button" value="Lancer" onclick="start_game()">
+
+        </div>
+
+        <div id="game" class="large_game_div scroll" style="display: none">
+            <div id="player_in_game_list" class=" droptarget kidzz_div"></div>
+
+            <div id="question" class="kidzz_div"></div>
+
+            <div id="reponse" class="answer_div"></div>
+
+            <div id="explication" class="kidzz_div " style="display: none"></div>
+
+            <input type="button" class="button-valided" value="Valider le tour !" onclick="valid_turn()">
+        </div>
+
+        <div id="end_game"  class="large_game_div"  style="display: none">
+            <div id="player_list_end_game"></div>
+
+            <form id="rate_kidzz" action="index.php" method="post">
+                <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
+                    <input class="" type="checkbox" id="favorite_checkbox" name="favoris" >
+                    <span class="">ajouter au favoris</span>
+                </label>
+                    <input id="rate+" type="radio" name="rate" value="+">
+                    <input id="rate-" type="radio" name="rate" value="-">
+            </form>
+            <input type="button" value="noter"  class="disable_offline" onclick="noter_kidzz('rate_kidzz')">
+            <form id="report_kidzz" action="index.php" method="post">
+                <input type="text" name="motif" required>
+            </form>
+            <input type="button" value="reporter !"  class="disable_offline" onclick="reporter_kidzz('report_kidzz')">
+        </div>
     </div>
 
-    <li class="">
-        <label class="" for="addUser">
-            <input id="addUser" class="kidzz_button" type="button" onclick="add_user('user_area', count_class('user_form')+1)" value="+">
-        </label>
-    </li>
-    <div id="remove_user"></div>
-    <input type="button" class="kidzz_button" value="go !" onclick="start_game()">
+    <div class="container-menu">
+        <a href="home.html">
+            <i class="fas fa-home"></i>
+        </a>
 
-</div>
-<div id="game" class="large_game_div" style="display: none">
-    <div id="player_in_game_list" class=" droptarget kidzz_div"></div>
-    <div id="question" class="kidzz_div"></div>
-    <div id="reponse" class="answer_div"></div>
-    <div id="explication" class="kidzz_div " style="display: none"></div>
-    <input type="button" value="valider le tour" onclick="valid_turn()">
-</div>
-<div id="end_game"  class="large_game_div"  style="display: none">
-    <div id="player_list_end_game">
+        <i class="fas fa-sync disable_offline" onclick="verification_kidzz_hors_ligne()"></i>
     </div>
-    <form id="rate_kidzz" action="index.php" method="post">
-        <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
-            <input class="" type="checkbox" id="favorite_checkbox" name="favoris" >
-            <span class="">ajouter au favoris</span>
-        </label>
-            <input id="rate+" type="radio" name="rate" value="+">
-            <input id="rate-" type="radio" name="rate" value="-">
-    </form>
-    <input type="button" value="noter"  class="disable_offline" onclick="noter_kidzz('rate_kidzz')">
-    <form id="report_kidzz" action="index.php" method="post">
-        <input type="text" name="motif" required>
-    </form>
-    <input type="button" value="reporter !"  class="disable_offline" onclick="reporter_kidzz('report_kidzz')">
-</div>
-
-
-
 </body>
-<footer>
-    <div id="nav_bar">
-        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
-        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
-        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
-    </div>
-</footer>
 </html>

@@ -146,9 +146,11 @@ function game_turn() {
             remove_class("question_div");
             remove_class("reponse_div");
         }
-        document.getElementById("question").appendChild(create_element("div", "question_"+incr, "question_div", "", items[incr]['info']['valeur']));
+        document.getElementById("question").appendChild(create_element("div", "question_"+incr, "question_div", "", ""));
+        document.getElementById("question_"+incr).appendChild(create_element("div", "question_item"+incr, "question_item", "", ""+items[incr]['info']['valeur']));
         for(i = 0; i < items[incr]['answer'].length; i++) {
-            document.getElementById("reponse").appendChild(create_element("div", "answer_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "move_player("+i+")", items[incr]['answer'][i]['valeur']));
+            document.getElementById("reponse").appendChild(create_element("div", "answer_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "move_player("+i+")", ""));
+            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_item"+i, "answer_item", "", ""+items[incr]['answer'][i]['valeur']));
         }
     }else{
         end_game();
