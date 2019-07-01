@@ -8,15 +8,15 @@ function add_question(id, incr) {
 
     //ajout question
     document.getElementById("div_question_" + incr).appendChild(create_element("LI", "question_"+incr, "question_form", "", ""));
-    document.getElementById("question_" + incr).appendChild(create_element("span", "", "question-title", "", "Question n°"+incr+" :"));
-    document.getElementById("question_" + incr).appendChild(create_element("span", "", "question-name", "", "Nom :"));
+    document.getElementById("question_" + incr).appendChild(create_element("div", "", "name-question", "", "Question n°"+incr+" :"));
+    document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom :"));
     document.getElementById("question_" + incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
     document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required"));
 
 
     //ajout reponse
     for (var i = 1; i < 5; i++) {
-        document.getElementById("div_question_" + incr).appendChild(create_element("LI", "answer_"+i+"_"+incr, "", "", ""));
+        document.getElementById("div_question_" + incr).appendChild(create_element("label", "answer_"+i+"_"+incr, "label-container", "", ""));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i+" :"));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "","answer_"+i+"_"+incr, "required"));
@@ -32,7 +32,7 @@ function add_question(id, incr) {
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
-        document.getElementById("form_delete_button").appendChild(create_button("button", "", "X", "delete_question()"));
+        document.getElementById("form_delete_button").appendChild(create_element("i", "", "fas fa-trash-alt button-del", "delete_question()"));
     }
 }
 
@@ -114,7 +114,7 @@ function add_user(id, incr) {
     }
 }
 
-//supression de joueur au lancement du jeux
+//suppression de joueur au lancement du jeux
 function delete_user(){
     let nb = count_class("user_form");
     if(nb>1){

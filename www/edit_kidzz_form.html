@@ -40,7 +40,7 @@
         </div>
 
         <div>
-            <div  id="kidzz_list" class="scroll-list-kidzz">
+            <div  id="kidzz_list" class="scroll">
                 <div class="">
                     <div class="">
                         <form id="question_form" action="index.php" method="post">
@@ -60,18 +60,18 @@
 
                     <div id="remove_question"></div>
 
-                        <label class="" for="addQuestion">
-                            <input id="addQuestion" class="disabled" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
-                            <span class="">Ajouter une question</span>
-                        </label>
+                    <label class="" for="addQuestion">
+                        <input id="addQuestion" class="disabled" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
+                        <span class="">Ajouter une question</span>
+                    </label>
 
-                    <div id="share">
-                        <input type="checkbox" class="disabled" name="share" checked>
-                        <span>Partager :</span>
-                    </div>
-
-                    <input type="button" value="valider"  class="disable_offline" onclick="modifie_kidzz('question_form')">
+                    <label for="input-share" id="share">
+                        <input type="checkbox" class="disabled" id="input-share" name="share" checked>
+                        <span style="width: 100%;border-radius: 3px;">Partager</span>
+                    </label>
                 </div>
+
+                <input type="button" value="Modifier"  class="init-button button-create disable_offline" onclick="modifie_kidzz('question_form')">
             </div>
         </div>
     </div>

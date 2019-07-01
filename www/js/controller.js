@@ -173,7 +173,7 @@ function verification_connexion() {
 
 
 //place la session dans un formulaire
-function recuperation_session(){
+function recuperation_session() {
     var formData = new FormData();
     formData.append("utilisateur", sessionStorage.getItem('utilisateur'));
     return formData;
