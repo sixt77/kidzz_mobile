@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
+    <link href="css/font/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -37,12 +37,12 @@
         <div id="login" class="home-container-log" style="display: none">
             <label for="id_field">
                 Adresse mail
-                <input type="text" class="input-log" id="id_field" name="email" required>
+                <input type="text" class="input-log" id="id_field" name="email" required maxlength="50">
             </label>
 
             <label for="password_field">
                 Mot de passe
-                <input type='password' class="input-log" id="password_field" name="motDePasse" required>
+                <input type='password' class="input-log" id="password_field" name="motDePasse" required maxlength="50">
             </label>
 
             <button type="submit" class="button-log disable_offline" id="buttonSignin"  name="signin" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">

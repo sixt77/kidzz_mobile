@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
+    <link href="css/font/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -36,22 +36,22 @@
             <form id="subscribe_form" method="post">
                 <label for="user_login">
                     Adresse mail
-                    <input type="text" class="input-log" id="user_login" name="email" required>
+                    <input type="text" class="input-log" id="user_login" name="email" required maxlength="50">
                 </label>
 
                 <label for="user_last_name">
                     Nom
-                    <input type="text" class="input-log" id="user_last_name" name="nom" required>
+                    <input type="text" class="input-log" id="user_last_name" name="nom" required maxlength="50">
                 </label>
 
                 <label for="user_first_name">
                     Prénom
-                    <input type="text" class="input-log" id="user_first_name" name="prenom" required>
+                    <input type="text" class="input-log" id="user_first_name" name="prenom" required maxlength="50">
                 </label>
 
                 <label for="user_pass">
                     Mot de passe
-                    <input type='password' class="input-log" id="user_pass" name="motDePasse" required>
+                    <input type='password' class="input-log" id="user_pass" name="motDePasse" required maxlength="50">
                 </label>
 
                 <input type="button" class="button-log disable_offline" id="butonSignup"  name="signup" onclick="inscription('subscribe_form')" value="Valider">
