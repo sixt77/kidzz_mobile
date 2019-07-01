@@ -23,7 +23,7 @@ function add_question(id, incr) {
     //ajout explication
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "form_explication_"+incr, "", "", ""));
     document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
-    document.getElementById("form_explication_" + incr).appendChild(create_input("textarea", "", "input-log question-explication-input", "question_"+incr+"_explication", "true", ""));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("textarea", "", "input-log question-explication-input", "", "", "question_"+incr+"_explication", "true"));
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
@@ -57,39 +57,38 @@ function fill_question(id) {
 
     for(var i = 0; i < items.length; i++){
 
-        document.getElementById(id).appendChild(create_element("ul", "div_question_" + i, "div_question_form", "", ""));
+        document.getElementById(id).appendChild(create_element("div", "div_question_" + (i+1), "", "", ""));
 
         //ajout question
-        document.getElementById("div_question_" + i).appendChild(create_element("LI", "question_"+(i+1), "question_form", "", ""));
-        document.getElementById("question_" + (i+1)).appendChild(create_element("span", "", "question-title", "", "Question n°"+(i+1)+" :"));
-        document.getElementById("question_" + (i+1)).appendChild(create_element("span", "", "question-name", "", "Nom :"));
-        document.getElementById("question_" + (i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
+        document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "question_"+(i+1), "question_form", "", ""));
+        document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "name-question", "", "Question n°"+(i+1)+" :"));
+        document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "", "", "Nom"));
         document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur']));
 
 
         //ajout reponse
         for (var j = 0; j < items[i]['answer'].length; j++) {
-            document.getElementById("div_question_" + i).appendChild(create_element("LI", "answer_"+(j+1)+"_"+(i+1), "", "", ""));
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("label", "form_label_"+i, "", "", ""));
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
+            document.getElementById("div_question_" + (i+1)).appendChild(create_label("answer_"+(j+1)+"_"+(i+1)+"_validity", "answer_"+(j+1)+"_"+(i+1), "label-container", "", ""));
             if(items[i]['answer'][j]['valide'] ==  1){
-                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", "", "", true));
+                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "answer_"+(j+1)+"_"+(i+1)+"_validity", "disabled","answer_"+(j+1)+"_"+(i+1)+"_validity", "", "", true));
             }else{
-                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
+                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "answer_"+(j+1)+"_"+(i+1)+"_validity", "disabled","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
             }
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "init-button input-answer","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
+
 
         }
 
         //ajout explication
-        document.getElementById("div_question_" + i).appendChild(create_element("LI", "form_explication_"+(i+1), "", "", ""));
-        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("span", "", "", "", "Explication :"));
-        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
-        document.getElementById("form_explication_" + (i+1)).appendChild(create_input("text", "", "","question_"+(i+1)+"_explication", "required", items[i]['info']['explication']));
+        document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "form_explication_"+(i+1), "", "", ""));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("textarea", "", "input-log question-explication-input", "", items[i]['info']['explication'], "question_"+(i+1)+"_explication", "true"));
+
 
         if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
             document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
-            document.getElementById("form_delete_button").appendChild(create_button("button", "", "X", "delete_question()"));
+            document.getElementById("form_delete_button").appendChild(create_element("i", "", "fas fa-trash-alt button-del", "delete_question()"));
         }
     }
 

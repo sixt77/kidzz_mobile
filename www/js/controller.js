@@ -1,10 +1,12 @@
 ////////////////////////////////////////////////////////toolbox//////////////////////////////////////////////////////////////////////////////////////////////
-function create_element($tag, $id, $class, $onclick, $html){
+function create_element($tag, $id, $class, $onclick, $html, $name, $required){
     var item = document.createElement($tag);
     if($id != "" && $id != undefined)item.setAttribute("id", $id);
     if($class != "" && $class != undefined)item.setAttribute("class", $class);
     if($onclick != "" && $onclick != undefined)item.setAttribute( "onclick", $onclick);
     if($html != "" && $html != undefined)item.innerHTML =$html;
+    if($name != "" && $name != undefined)item.setAttribute("name", $name);
+    if($required != "" && $required != undefined)item.setAttribute("required", 'required');
     return item;
 }
 
