@@ -8,6 +8,16 @@ function create_element($tag, $id, $class, $onclick, $html){
     return item;
 }
 
+function create_label($for, $id, $class, $onclick, $html){
+    var item = document.createElement('label');
+    if($for != "" && $for != undefined)item.htmlFor = $for;
+    if($id != "" && $id != undefined)item.setAttribute("id", $id);
+    if($class != "" && $class != undefined)item.setAttribute("class", $class);
+    if($onclick != "" && $onclick != undefined)item.setAttribute( "onclick", $onclick);
+    if($html != "" && $html != undefined)item.innerHTML =$html;
+    return item;
+}
+
 function create_input($type, $id, $class, $name, $required, $value, $cheked){
     var item = document.createElement("input");
     item.type = $type;

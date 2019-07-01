@@ -2,33 +2,28 @@
 
 //ajout de question a la creation de kidzz
 function add_question(id, incr) {
-
-    document.getElementById(id).appendChild(create_element("ul", "div_question_" + incr, "div_question_form", "", ""));
-
+    document.getElementById(id).appendChild(create_element("div", "div_question_" + incr, "", "", ""));
 
     //ajout question
-    document.getElementById("div_question_" + incr).appendChild(create_element("LI", "question_"+incr, "question_form", "", ""));
+    document.getElementById("div_question_" + incr).appendChild(create_element("div", "question_"+incr, "question_form", "", ""));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "name-question", "", "Question n°"+incr+" :"));
-    document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom :"));
-    document.getElementById("question_" + incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
+    document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom"));
     document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required"));
 
 
     //ajout reponse
     for (var i = 1; i < 5; i++) {
-        document.getElementById("div_question_" + incr).appendChild(create_element("label", "answer_"+i+"_"+incr, "label-container", "", ""));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i+" :"));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "","answer_"+i+"_"+incr, "required"));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("checkbox", "", "","answer_"+i+"_"+incr+"_validity", ""));
+        document.getElementById("div_question_" + incr).appendChild(create_label("answer_"+i+"_"+incr+"_validity", "answer_"+i+"_"+incr, "label-container", "", ""));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("checkbox", "answer_"+i+"_"+incr+"_validity", "disabled", "answer_"+i+"_"+incr+"_validity", true));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "init-button input-answer","answer_"+i+"_"+incr, "required"));
     }
 
 
     //ajout explication
-    document.getElementById("div_question_" + incr).appendChild(create_element("LI", "form_explication_"+incr, "", "", ""));
-    document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "", "", "Explication :"));
-    document.getElementById("form_explication_" + incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
-    document.getElementById("form_explication_" + incr).appendChild(create_input("text", "", "","question_"+incr+"_explication", "required"));
+    document.getElementById("div_question_" + incr).appendChild(create_element("div", "form_explication_"+incr, "", "", ""));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
+    document.getElementById("form_explication_" + incr).appendChild(create_input("textarea", "", "input-log question-explication-input", "question_"+incr+"_explication", "true", ""));
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
@@ -269,7 +264,6 @@ function get_player_list() {
 //affichage des joueurs
 function display_player_list(player_list, div) {
     remove_class("joueur_div");
-    console.log(player_list);
     for(var i in player_list){
         document.getElementById(div).appendChild(create_element("div", "joueur_"+i, "joueur_div", "select_player("+i+")", player_list[i][0]));
     }
