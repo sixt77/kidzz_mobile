@@ -2,28 +2,33 @@
 
 //ajout de question a la creation de kidzz
 function add_question(id, incr) {
+
+    document.getElementById(id).appendChild(create_element("ul", "div_question_" + incr, "div_question_form", "", ""));
+
+
     //ajout question
-    document.getElementById(id).appendChild(create_element("LI", "question_"+incr, "question_form", "", "question n°"+incr+" :"));
-    document.getElementById("question_"+incr).appendChild(create_element("span", "", "", "", "Nom :"));
-    document.getElementById("question_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
-    document.getElementById("question_"+incr).appendChild(create_input("text", "", "","question_"+incr, "required"));
+    document.getElementById("div_question_" + incr).appendChild(create_element("LI", "question_"+incr, "question_form", "", ""));
+    document.getElementById("question_" + incr).appendChild(create_element("span", "", "question-title", "", "Question n°"+incr+" :"));
+    document.getElementById("question_" + incr).appendChild(create_element("span", "", "question-name", "", "Nom :"));
+    document.getElementById("question_" + incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
+    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required"));
 
 
     //ajout reponse
     for (var i = 1; i < 5; i++) {
-        document.getElementById(id).appendChild(create_element("LI", "answer_"+i+"_"+incr, "", "", ""));
-        document.getElementById("answer_"+i+"_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i+" :"));
-        document.getElementById("answer_"+i+"_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
-        document.getElementById("answer_"+i+"_"+incr).appendChild(create_input("text", "", "","answer_"+i+"_"+incr, "required"));
-        document.getElementById("answer_"+i+"_"+incr).appendChild(create_input("checkbox", "", "","answer_"+i+"_"+incr+"_validity", ""));
+        document.getElementById("div_question_" + incr).appendChild(create_element("LI", "answer_"+i+"_"+incr, "", "", ""));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i+" :"));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "","answer_"+i+"_"+incr, "required"));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("checkbox", "", "","answer_"+i+"_"+incr+"_validity", ""));
     }
 
 
     //ajout explication
-    document.getElementById(id).appendChild(create_element("LI", "form_explication_"+incr, "", "", ""));
-    document.getElementById("form_explication_"+incr).appendChild(create_element("span", "", "", "", "explication :"));
-    document.getElementById("form_explication_"+incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
-    document.getElementById("form_explication_"+incr).appendChild(create_input("text", "", "","question_"+incr+"_explication", "required"));
+    document.getElementById("div_question_" + incr).appendChild(create_element("LI", "form_explication_"+incr, "", "", ""));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "", "", "Explication :"));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("label", "form_label_"+incr, "", "", ""));
+    document.getElementById("form_explication_" + incr).appendChild(create_input("text", "", "","question_"+incr+"_explication", "required"));
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
@@ -54,33 +59,38 @@ function fill_kidzz(kidzz) {
 
 //ajout de question a la modification de kidzz
 function fill_question(id) {
+
     for(var i = 0; i < items.length; i++){
+
+        document.getElementById(id).appendChild(create_element("ul", "div_question_" + i, "div_question_form", "", ""));
+
         //ajout question
-        document.getElementById(id).appendChild(create_element("LI", "question_"+(i+1), "question_form", "", "question n°"+(i+1)+" :"));
-        document.getElementById("question_"+(i+1)).appendChild(create_element("span", "", "", "", "Nom :"));
-        document.getElementById("question_"+(i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
-        document.getElementById("question_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1), "required", items[i]['info']['valeur']));
+        document.getElementById("div_question_" + i).appendChild(create_element("LI", "question_"+(i+1), "question_form", "", ""));
+        document.getElementById("question_" + (i+1)).appendChild(create_element("span", "", "question-title", "", "Question n°"+(i+1)+" :"));
+        document.getElementById("question_" + (i+1)).appendChild(create_element("span", "", "question-name", "", "Nom :"));
+        document.getElementById("question_" + (i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
+        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur']));
 
 
         //ajout reponse
         for (var j = 0; j < items[i]['answer'].length; j++) {
-            document.getElementById(id).appendChild(create_element("LI", "answer_"+(j+1)+"_"+(i+1), "", "", ""));
-            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
-            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_element("label", "form_label_"+i, "", "", ""));
-            document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("text", "", "","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
+            document.getElementById("div_question_" + i).appendChild(create_element("LI", "answer_"+(j+1)+"_"+(i+1), "", "", ""));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("label", "form_label_"+i, "", "", ""));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
             if(items[i]['answer'][j]['valide'] ==  1){
-                document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", "", "", true));
+                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", "", "", true));
             }else{
-                document.getElementById("answer_"+(j+1)+"_"+(i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
+                document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "", "","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
             }
 
         }
 
         //ajout explication
-        document.getElementById(id).appendChild(create_element("LI", "form_explication_"+(i+1), "", "", ""));
-        document.getElementById("form_explication_"+(i+1)).appendChild(create_element("span", "", "", "", "explication :"));
-        document.getElementById("form_explication_"+(i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
-        document.getElementById("form_explication_"+(i+1)).appendChild(create_input("text", "", "","question_"+(i+1)+"_explication", "required", items[i]['info']['explication']));
+        document.getElementById("div_question_" + i).appendChild(create_element("LI", "form_explication_"+(i+1), "", "", ""));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("span", "", "", "", "Explication :"));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("label", "form_label_"+(i+1), "", "", ""));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_input("text", "", "","question_"+(i+1)+"_explication", "required", items[i]['info']['explication']));
 
         if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
             document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));

@@ -13,10 +13,12 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <div id="snackbar"></div>
 
     <script>
         $( document ).ready(function() {
@@ -25,27 +27,53 @@
             verification_message();
         });
     </script>
-    <div id="snackbar"></div>
+
 </head>
+
 <body>
-<div id="home" class="container-main">
-    <div class="container-title">
-        <h2>Kidzz</h2>
-        <form class="container-form-button" action="index.php" method="post">
-            <input type="button" class="init-button" value="X" onclick="deconnexion()">
-        </form>
+    <div id="home" class="container-main">
+        <div class="container-title">
+            <h2>Kidzz</h2>
+
+            <div class="container-form-button">
+                <i class="fas fa-power-off" onclick="deconnexion()"></i>
+            </div>
+        </div>
+
+        <div class="scroll">
+            <div class="button button-modeSelec button-menu-online disable_offline">
+                <a href="play_online_kidzz.html" >
+                    Kidzz en ligne !
+                </a>
+            </div>
+
+            <div class="button button-modeSelec button-menu-myKidzz">
+                <a href="play_my_kidzz.html">
+                    Mes kidzz !
+                </a>
+            </div>
+
+            <div class="button button-modeSelec button-menu-favorite">
+                <a href="play_favorite_kidzz.html">
+                    Favoris
+                </a>
+            </div>
+
+            <div class="button button-menu-manage disable_offline">
+                <a href="manage_kidzz.html">
+                    Gérez mes kidzz !
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="scroll">
-        <a href="play_online_kidzz.html"><button type="button" class="button button-modeSelec button-menu-online disable_offline" name="play_online_kidzz" value="">kidzz en ligne !</button></a>
-        <a href="play_my_kidzz.html"><button type="button" class="button button-modeSelec button-menu-myKidzz"  name="play_my_kidzz" value="">mes kidzz !</button></a>
-        <a href="play_favorite_kidzz.html"><button type="button" class="button button-modeSelec button-menu-favorite" name="play_favorite_kidzz" value="">favoris</button></a>
-        <a href="manage_kidzz.html" ><button type="button"  class="button button-menu-manage disable_offline" name="manage_kidzz" value="">gerez mes kidzz !</button></a>
+
+    <div class="container-menu">
+        <a href="home.html">
+            <i class="fas fa-home"></i>
+        </a>
+
+        <i class="fas fa-sync disable_offline" onclick="verification_kidzz_hors_ligne()"></i>
     </div>
-</div>
-<div class="container-menu">
-    <a href="home.html"><input type="button" class="init-button" value="H"></a>
-    <input type="button" value="sync" class="init-button disable_offline" onclick="verification_kidzz_hors_ligne()">
-</div>
 </body>
 
 </html>

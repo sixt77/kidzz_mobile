@@ -13,11 +13,13 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
 
-
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <div id="snackbar"></div>
+
     <script>
         $( document ).ready(function() {
             verification_reseau();
@@ -25,26 +27,33 @@
             affichage_login();
         });
     </script>
-    <div id="snackbar"></div>
+
 </head>
 
 <body>
-<div id="home" class="home-container">
-    <h1>Kidzz</h1>
-    <div id="login" class="home-container-log" style="display: none">
-        <label for="id_field">
-            Adresse mail
-            <input type="text" class="input-log" id="id_field" name="email" required>
-        </label>
-        <label for="password_field">
-            Mot de passe
-            <input type='password' class="input-log" id="password_field" name="motDePasse" required>
-        </label>
-        <button type="submit" class="button-log disable_offline" id="buttonSignin"  name="signin" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">S'identifier</button>
-        <a href="subscribe.html"><button class="button-log disable_offline" value="s'inscrire">S'inscrire</button></a>
-    </div>
-</div>
+    <div id="home" class="home-container">
+        <h1>Kidzz</h1>
 
+        <div id="login" class="home-container-log" style="display: none">
+            <label for="id_field">
+                Adresse mail
+                <input type="text" class="input-log" id="id_field" name="email" required>
+            </label>
+
+            <label for="password_field">
+                Mot de passe
+                <input type='password' class="input-log" id="password_field" name="motDePasse" required>
+            </label>
+
+            <button type="submit" class="button-log disable_offline" id="buttonSignin"  name="signin" onclick="connexion(document.getElementById('id_field').value, document.getElementById('password_field').value)">
+                S'identifier
+            </button>
+
+            <a href="subscribe.html">
+                <button class="button-log disable_offline" value="s'inscrire">S'inscrire</button>
+            </a>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -13,10 +13,12 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <div id="snackbar"></div>
 
     <script>
         $( document ).ready(function() {
@@ -25,49 +27,61 @@
             edition_kidzz();
         });
     </script>
-    <div id="snackbar"></div>
+
 </head>
 <body>
-<div class="">
-    <div class="">
-        <form id="question_form" action="index.php" method="post">
-            <label for="kidzz_name">
-                nom
-                <input type="text" class="" id="kidzz_name" name="nom" value="" required>
-            </label>
+    <div id="edit_kidzz" class="container-main">
+        <div class="container-title">
+            <h2>Kidzz</h2>
 
-            <label for="kidzz_description">
-                description
-                <input type='text' class="" id="kidzz_description" name="description" value="" required>
-            </label>
-            <div id="question_area">
-
+            <div class="container-form-button">
+                <i class="fas fa-power-off" onclick="deconnexion()"></i>
             </div>
-        </form>
+        </div>
+
+        <div>
+            <div  id="kidzz_list" class="scroll-list-kidzz">
+                <div class="">
+                    <div class="">
+                        <form id="question_form" action="index.php" method="post">
+                            <label for="kidzz_name">
+                                <span>Nom</span>
+                                <input type="text" class="input-log" id="kidzz_name" name="nom" value="" required>
+                            </label>
+
+                            <label for="kidzz_description">
+                                <span>Description</span>
+                                <input type='text' class="input-log" id="kidzz_description" name="description" value="" required>
+                            </label>
+
+                            <div id="question_area"></div>
+                        </form>
+                    </div>
+
+                    <div id="remove_question"></div>
+
+                        <label class="" for="addQuestion">
+                            <input id="addQuestion" class="disabled" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
+                            <span class="">Ajouter une question</span>
+                        </label>
+
+                    <div id="share">
+                        <input type="checkbox" class="disabled" name="share" checked>
+                        <span>Partager :</span>
+                    </div>
+
+                    <input type="button" value="valider"  class="disable_offline" onclick="modifie_kidzz('question_form')">
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="remove_question">
 
+    <div class="container-menu">
+        <a href="home.html">
+            <i class="fas fa-home"></i>
+        </a>
+
+        <i class="fas fa-sync disable_offline" onclick="verification_kidzz_hors_ligne()"></i>
     </div>
-    <li class="">
-        <label class="" for="addQuestion">
-            <input id="addQuestion" class="" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
-            <span class="">Ajouter une question</span>
-        </label>
-    </li>
-
-    <li id="share">
-        <span>partagé :</span>
-
-
-    </li>
-    <input type="button" value="valider"  class="disable_offline" onclick="modifie_kidzz('question_form')">
-</div>
 </body>
-<footer>
-    <div id="nav_bar">
-        <input type="button" value="sync" class="disable_offline" onclick="verification_kidzz_hors_ligne()">
-        <a href="home.html"><button type="button" class=""   value="">accueil</button></a>
-        <a href="mode_selection.html"><button type="button" class="" name="play" value="">jouer</button></a>
-    </div>
-</footer>
 </html>

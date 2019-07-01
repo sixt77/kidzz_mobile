@@ -13,52 +13,55 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
 
-
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <div id="snackbar"></div>
+
     <script>
         $( document ).ready(function() {
             verification_reseau();
         });
     </script>
-    <div id="snackbar"></div>
+
 </head>
 
 <body>
-<div id="signupForm" class="home-container">
-    <h1>Kidzz</h1>
+    <div id="signupForm" class="home-container">
+        <h1>Kidzz</h1>
 
-    <div class="home-container-log">
-        <form id="subscribe_form" method="post">
-            <label for="user_login">
-                Adresse mail
-                <input type="text" class="input-log" id="user_login" name="email" required>
-            </label>
+        <div class="home-container-log">
+            <form id="subscribe_form" method="post">
+                <label for="user_login">
+                    Adresse mail
+                    <input type="text" class="input-log" id="user_login" name="email" required>
+                </label>
 
-            <label for="user_last_name">
-                Nom
-                <input type="text" class="input-log" id="user_last_name" name="nom" required>
-            </label>
+                <label for="user_last_name">
+                    Nom
+                    <input type="text" class="input-log" id="user_last_name" name="nom" required>
+                </label>
 
-            <label for="user_first_name">
-                Prénom
-                <input type="text" class="input-log" id="user_first_name" name="prenom" required>
-            </label>
+                <label for="user_first_name">
+                    Prénom
+                    <input type="text" class="input-log" id="user_first_name" name="prenom" required>
+                </label>
 
-            <label for="user_pass">
-                Mot de passe
-                <input type='password' class="input-log" id="user_pass" name="motDePasse" required>
-            </label>
-            <input type="button" class="button-log disable_offline" id="butonSignup"  name="signup" onclick="inscription('subscribe_form')" value="Valider">
-            <a href="index.html"><button type="button" class="disable_offline" value="">se connecter</button></a>
-        </form>
+                <label for="user_pass">
+                    Mot de passe
+                    <input type='password' class="input-log" id="user_pass" name="motDePasse" required>
+                </label>
 
+                <input type="button" class="button-log disable_offline" id="butonSignup"  name="signup" onclick="inscription('subscribe_form')" value="Valider">
 
+                <a href="index.html">
+                    <button type="button" class="button-log disable_offline" value="">Se connecter</button>
+                </a>
+            </form>
+        </div>
     </div>
-</div>
-
 </body>
 
 </html>
