@@ -105,6 +105,9 @@ function add_user(id, incr) {
         document.getElementById("remove_user").appendChild(create_element("LI", "form_delete_button", "form_delete_button ", "", ""));
         document.getElementById("form_delete_button").appendChild(create_button("button", "kidzz_button", "-", "delete_user()"));
     }
+    if(count_class("user_form")>7 && count_class("add_user_button")==1){
+        document.getElementById('addUser').classList.add('hidden');
+    }
 }
 
 //suppression de joueur au lancement du jeux
@@ -115,6 +118,10 @@ function delete_user(){
     }
     if(nb===2 || nb < 2){
         remove_id("form_delete_button");
+    }
+    console.log(count_class("user_form"), document.getElementById('addUser').classList.contains('hidden')   );
+    if(count_class("user_form")<=7 && document.getElementById('addUser').classList.contains('hidden')){
+        document.getElementById('addUser').classList.remove('hidden');
     }
 }
 

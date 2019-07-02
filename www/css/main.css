@@ -782,3 +782,6 @@ h2 {
     border-style: groove;
     border-width: 1px;
 }
+.hidden{
+    display: none;
+}
