@@ -204,6 +204,7 @@ function gestion_kidzz() {
 }
 function gestion_kidzz_callback(response) {
     response = JSON.parse(response);
+    kidzz = response;
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
@@ -463,11 +464,11 @@ function recuperation_hors_ligne_kidzz_favoris() {
     }
     kidzz = response;
     for (var i = 0; i < response.length; i++) {
-        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
-        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
-        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_button('id_button_play_'+i,'init-button button-play','play', 'choix_kidzz('+response[i]['id']+')'));
-        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
-        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
+        document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
+        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
+        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
+        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
+        document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_' + i, 'kidzz_div_list_item kidzz_div_list_item_note', '', response[i]['note']));
     }
 }
 
