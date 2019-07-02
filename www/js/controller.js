@@ -310,7 +310,11 @@ function edition_kidzz_callback(response) {
 
 //modification de kidzz
 function modifie_kidzz(id) {
-    envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+    if(verify_kidzz()){
+        envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+    }else{
+        show_snack_bar('formulaire incomplet');
+    }
 }
 
 function modifie_kidzz_callback(response) {
