@@ -149,7 +149,8 @@ function game_turn() {
         document.getElementById("question_"+incr).appendChild(create_element("div", "question_item"+incr, "question_item", "", ""+items[incr]['info']['valeur']));
         for(i = 0; i < items[incr]['answer'].length; i++) {
             document.getElementById("reponse").appendChild(create_element("div", "answer_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "move_player("+i+")", ""));
-            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_item"+i, "answer_item", "", ""+items[incr]['answer'][i]['valeur']));
+            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_parent_item"+i, "answer_item", "", ""+items[incr]['answer'][i]['valeur']));
+            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_item"+i, "answer_item", "", ""));
         }
     }else{
         end_game();
@@ -159,14 +160,15 @@ function game_turn() {
 //validation des tours
 function valid_turn() {
     if(count_class("explication_div")===0){
+        document.getElementById('valid_turn_button').value = 'Tour suivant !';
         hide_id('reponse');
         show_id('explication');
         count_point();
         remove_class('joueur_div');
         display_player_list_with_score(player_list, 'player_in_game_list');
         document.getElementById("explication").appendChild(create_element("div", incr, "explication_div", "", items[incr]['info']['explication']));
-
     }else{
+        document.getElementById('valid_turn_button').value = 'Valider le tour ! !';
         remove_class("explication_div");
         hide_id('explication');
         show_id('reponse');
@@ -201,8 +203,8 @@ function move_player(id){
     player = document.getElementsByClassName('selected');
     for(var i = 0; i < player.length; i++){
         if(id != 'start'){
-            if(player[i].parentElement.id != "answer_" + id) {
-                document.getElementById('answer_' + id).append(player[i]);
+            if(player[i].parentElement.id != "answer_item" + id) {
+                document.getElementById('answer_item' + id).append(player[i]);
             }
         }else{
             if(player[i].parentElement.id != "player_in_game_list"){
