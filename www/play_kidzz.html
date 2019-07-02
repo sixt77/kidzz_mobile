@@ -75,22 +75,34 @@
             <input type="button" class="button-valided" value="Valider le tour !" onclick="valid_turn()">
         </div>
 
-        <div id="end_game"  class="large_game_div"  style="display: none">
+        <div id="end_game"  class="large_game_div scroll"  style="display: none">
             <div id="player_list_end_game" class="div-player-list-end-game"></div>
 
             <form id="rate_kidzz" action="index.php" method="post">
-                <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
-                    <input class="" type="checkbox" id="favorite_checkbox" name="favoris" >
-                    <span class="">ajouter aux favoris</span>
+                <label class="label-favoris" for="favorite_checkbox">
+                    <input class="disabled input-favoris" type="checkbox" id="favorite_checkbox" name="favoris" >
+                    <span class="">Ajouter aux favoris</span>
                 </label>
-                    <input id="rate+" type="radio" name="rate" value="+">
-                    <input id="rate-" type="radio" name="rate" value="-">
+
+                <label class="label-rate" for="rate_down">
+                    <input id="rate_down" type="radio" class="disabled" name="rate" value="">
+                    <i class="fas fa-thumbs-down"></i>
+                </label>
+
+                <label class="label-rate" for="rate_up">
+                    <input id="rate_up" type="radio" class="disabled" name="rate" value="">
+                    <i class="fas fa-thumbs-up"></i>
+                </label>
+
             </form>
-            <input type="button" value="noter"  class="disable_offline" onclick="noter_kidzz('rate_kidzz')">
+
+            <input type="button" value="Noter"  class="init-button button-note disable_offline" onclick="noter_kidzz('rate_kidzz')">
+
             <form id="report_kidzz" action="index.php" method="post">
-                <input type="text" name="motif" required>
+                <textarea class="input-log question-explication-input" name="motif" required></textarea>
             </form>
-            <input type="button" value="reporter !"  class="disable_offline" onclick="reporter_kidzz('report_kidzz')">
+
+            <input type="button" value="Reporter !"  class="button-report disable_offline" onclick="reporter_kidzz('report_kidzz')">
         </div>
     </div>
 

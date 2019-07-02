@@ -236,9 +236,9 @@ function end_game() {
     hide_class("large_game_div");
     show_id("end_game");
     if(kidzz['note_utilisateur'] == 5){
-        document.getElementById("rate+").checked = true;
+        document.getElementById("rate_up").checked = true;
     }else if(kidzz['note_utilisateur'] == 0){
-        document.getElementById("rate-").checked = true;
+        document.getElementById("rate_down").checked = true;
     }
     if(kidzz['favoris'] == true){
         document.getElementById('favorite_checkbox').checked = true;
