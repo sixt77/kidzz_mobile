@@ -777,6 +777,7 @@ h2 {
     margin-bottom: 0;
     height: 35px;
     overflow: hidden;
+    word-wrap: break-word;
 }
 
 .kidzz_div {

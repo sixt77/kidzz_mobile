@@ -161,8 +161,11 @@ function valid_turn() {
     if(count_class("explication_div")===0){
         hide_id('reponse');
         show_id('explication');
-        document.getElementById("explication").appendChild(create_element("div", incr, "explication_div", "", items[incr]['info']['explication']));
         count_point();
+        remove_class('joueur_div');
+        display_player_list_with_score(player_list, 'player_in_game_list');
+        document.getElementById("explication").appendChild(create_element("div", incr, "explication_div", "", items[incr]['info']['explication']));
+
     }else{
         remove_class("explication_div");
         hide_id('explication');
