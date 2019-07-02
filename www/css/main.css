@@ -5,7 +5,6 @@
 
 ::-webkit-scrollbar {
     display: none;
-/ / Safari and Chrome
 }
 
 * {
@@ -36,6 +35,7 @@ li {
     line-height: 30px;
     border: 0;
     background-color: #1e272e;
+    color: #fff;
 }
 
 #manage_kidzz .searchBar {
@@ -50,6 +50,9 @@ li {
     color: #fff;
 }
 
+input:focus {
+    outline: none;
+}
 
 /*******************************
             SNACK BAR
@@ -380,7 +383,7 @@ h2 {
 .button-report {
     width: 130px;
     display: block;
-    margin: 0 auto;
+    margin: 15px auto 25px;
     padding: 9px 15px;
     font-size: 20px;
     background-color: aquamarine;
@@ -396,13 +399,13 @@ h2 {
 
 .input-log {
     font-size: 16px;
-    width: 100%;
+    width: calc(100% - 60px);
     height: 40px;
     padding: 10px 15px;
     border: 1px solid #ddd;
     color: #32373c;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 10px 30px;
     line-height: 18px;
 }
 
@@ -556,6 +559,7 @@ h2 {
     background-color: #ffdd59;
 }
 
+
 .kidzz_div_list_item {
 }
 
@@ -589,16 +593,17 @@ h2 {
 
 .div-player-list-end-game {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    padding-top: 10px;
 }
 
 .div-player-list-end-game .joueur_div {
-    width: 80%;
+    width: 200px;
     margin-bottom: 10px;
     line-height: 20px;
     font-size: 18px;
+    margin: 5px auto;
 }
 
 .kidzz-title-joueur {
@@ -640,7 +645,7 @@ h2 {
 }
 
 .joueur_div {
-    width: 48%;
+    width: 40%;
     height: 30px;
     font-size: 14px;
     padding: 5px 0px;
@@ -649,10 +654,7 @@ h2 {
     border-radius: 3px;
     overflow: hidden;
     text-align: center;
-    margin-left: 1%;
-    float: left;
-    margin-right: 1%;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
 }
 
 .selected {
@@ -672,15 +674,14 @@ h2 {
 .large_game_div {
     width: 100%;
     margin: 0 auto;
-    padding-top: 20px;
 }
 
 .reponse_div {
     width: 50%;
-    height: 160px;
-    display: block;
-    justify-content: center;
-    align-items: center;
+    height: 200px;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
     font-size: 16px;
     flex-wrap: wrap;
     overflow: scroll;
@@ -708,40 +709,52 @@ h2 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    height: 320px;
 }
 
 .answer_item {
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     margin-bottom: 0;
-    height: 35px;
-    overflow: hidden;
+    height: 55px;
     word-wrap: break-word;
+    padding: 5px 20px;
+}
+
+.answer_item_list_joueur {
+    display: flex;
+    width: 100%;
+    height: 145px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .kidzz_div {
     width: 100%;
-    min-height: 50px;
+    min-height: 90px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     overflow: scroll;
     scrollbar-width: none;
-    padding: 10px 0;
+    padding: 0px 0;
 }
 
 #player_in_game_list {
-    display: block;
 }
+
+.kidzz_player_game {
+    height: calc(100vh - 690px);
+}
+
 
 .question_item {
     font-size: 21px;
     text-align: center;
-    padding: 0px 10px;
+    padding: 15px;
+    word-break: break-word;
 }
 
 .question-explication {
@@ -751,6 +764,11 @@ h2 {
 .question-explication-input {
     height: 150px;
     resize: none;
+}
+
+.explication_div {
+    padding: 15px 40px;
+    word-break: break-word;
 }
 
 

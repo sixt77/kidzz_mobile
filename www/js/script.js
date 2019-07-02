@@ -157,7 +157,7 @@ function game_turn() {
         for(i = 0; i < items[incr]['answer'].length; i++) {
             document.getElementById("reponse").appendChild(create_element("div", "answer_"+i, "reponse_div reponse_div_"+(i+1)+" droptarget", "move_player("+i+")", ""));
             document.getElementById("answer_"+i).appendChild(create_element("div", "answer_parent_item"+i, "answer_item", "", ""+items[incr]['answer'][i]['valeur']));
-            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_item"+i, "answer_item", "", ""));
+            document.getElementById("answer_"+i).appendChild(create_element("div", "answer_item"+i, "answer_item_list_joueur", "", ""));
         }
     }else{
         end_game();
