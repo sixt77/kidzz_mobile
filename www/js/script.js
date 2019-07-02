@@ -8,7 +8,7 @@ function add_question(id, incr) {
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "question_"+incr, "question_form", "", ""));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "name-question", "", "Question n°"+incr+" :"));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom"));
-    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required", "","", "50"));
+    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required", "","", "50", 'verify_input_kidzz(this)'));
 
 
     //ajout reponse
@@ -16,14 +16,14 @@ function add_question(id, incr) {
         document.getElementById("div_question_" + incr).appendChild(create_label("answer_"+i+"_"+incr+"_validity", "answer_"+i+"_"+incr, "label-container", "", ""));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("checkbox", "answer_"+i+"_"+incr+"_validity", "disabled", "answer_"+i+"_"+incr+"_validity", true));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "init-button input-answer","answer_"+i+"_"+incr, "required", "","","50"));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "init-button input-answer","answer_"+i+"_"+incr, "required", "","","50", 'verify_input_kidzz(this)'));
     }
 
 
     //ajout explication
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "form_explication_"+incr, "", "", ""));
     document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
-    document.getElementById("form_explication_" + incr).appendChild(create_element("textarea", "", "input-log question-explication-input", "", "", "question_"+incr+"_explication", "true", "500"));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("textarea", "", "input-log question-explication-input", "", "", "question_"+incr+"_explication", "true", "300", 'verify_input_kidzz(this)'));
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
@@ -64,7 +64,7 @@ function fill_question(id) {
         document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "question_"+(i+1), "question_form", "", ""));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "name-question", "", "Question n°"+(i+1)+" :"));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "", "", "Nom"));
-        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur'], "", "50"));
+        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur'], "", "50", 'verify_input_kidzz(this)'));
 
 
         //ajout reponse
@@ -76,13 +76,13 @@ function fill_question(id) {
                 document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "answer_"+(j+1)+"_"+(i+1)+"_validity", "disabled","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
             }
             document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+""));
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "init-button input-answer","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur'], "", "50"));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "init-button input-answer","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur'], "", "50", 'verify_input_kidzz(this)'));
         }
 
         //ajout explication
         document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "form_explication_"+(i+1), "", "", ""));
         document.getElementById("form_explication_" + (i+1)).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
-        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("textarea", "", "input-log question-explication-input", "", items[i]['info']['explication'], "question_"+(i+1)+"_explication", "true", "500"));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("textarea", "", "input-log question-explication-input", "", items[i]['info']['explication'], "question_"+(i+1)+"_explication", "true", "300", 'verify_input_kidzz(this)'));
 
 
         if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
@@ -247,7 +247,7 @@ function end_game() {
         document.getElementById('favorite_checkbox').checked = true;
     }
     console.log(kidzz);
-    player_list.sort(function(a, b){return b[1] - a[1]});
+
     display_player_list_with_score(player_list, "player_list_end_game");
 
 }
@@ -275,6 +275,8 @@ function get_player_list() {
 //affichage des joueurs
 function display_player_list(player_list, div) {
     remove_class("joueur_div");
+    sorted_player_list = player_list;
+    sorted_player_list.sort(() => Math.random() - 0.5);
     for(var i in player_list){
         document.getElementById(div).appendChild(create_element("div", "joueur_"+i, "joueur_div", "select_player("+i+")", player_list[i][0]));
     }
@@ -287,7 +289,9 @@ function display_player_list(player_list, div) {
 //affichage des joueurs avec des score
 function display_player_list_with_score(player_list, div) {
     remove_class("joueur_div");
-    for(var i in player_list){
+    sorted_player_list = player_list;
+    sorted_player_list.sort(function(a, b){return b[1] - a[1]});
+    for(var i in sorted_player_list){
         document.getElementById(div).appendChild(create_element("div", "joueur_"+i, "joueur_div", "", player_list[i][0]+" : "+player_list[i][1]));
     }
 

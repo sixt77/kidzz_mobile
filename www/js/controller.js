@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////toolbox//////////////////////////////////////////////////////////////////////////////////////////////
-function create_element($tag, $id, $class, $onclick, $html, $name, $required, $maxlenght){
+function create_element($tag, $id, $class, $onclick, $html, $name, $required, $maxlenght, $oninput){
     var item = document.createElement($tag);
     if($id != "" && $id != undefined)item.setAttribute("id", $id);
     if($class != "" && $class != undefined)item.setAttribute("class", $class);
@@ -8,6 +8,7 @@ function create_element($tag, $id, $class, $onclick, $html, $name, $required, $m
     if($name != "" && $name != undefined)item.setAttribute("name", $name);
     if($required != "" && $required != undefined)item.setAttribute("required", 'required');
     if($maxlenght != "" && $maxlenght != undefined)item.maxLength = $maxlenght;
+    if($oninput != "" && $oninput != undefined)item.setAttribute("oninput", $oninput);
     return item;
 }
 
@@ -21,7 +22,7 @@ function create_label($for, $id, $class, $onclick, $html){
     return item;
 }
 
-function create_input($type, $id, $class, $name, $required, $value, $cheked, $maxlenght){
+function create_input($type, $id, $class, $name, $required, $value, $cheked, $maxlenght, $oninput){
     var item = document.createElement("input");
     item.type = $type;
     if($id != "" && $id != undefined)item.setAttribute("id", $id);
@@ -31,6 +32,7 @@ function create_input($type, $id, $class, $name, $required, $value, $cheked, $ma
     if($value != "" && $value != undefined)item.setAttribute("value", $value);
     if($cheked == true && $cheked != undefined)item.checked = true;
     if($maxlenght != "" && $maxlenght != undefined)item.maxLength = $maxlenght;
+    if($oninput != "" && $oninput != undefined)item.setAttribute("oninput", $oninput);
     return item;
 }
 
@@ -213,8 +215,55 @@ function gestion_kidzz_callback(response) {
 }
 
 //creation de kidzz
+function verify_kidzz() {
+    kidzz_input_log = document.getElementsByClassName('input-log');
+    kidzz_input_question = document.getElementsByClassName('input-question');
+    kidzz_input_answer = document.getElementsByClassName('input-answer');
+    kidzz_input_explication = document.getElementsByClassName('question-explication-input');
+    console.log(kidzz_input_question);
+    verif = true;
+    for (var i in kidzz_input_log) {
+        if(kidzz_input_log[i].value == ''){
+            kidzz_input_log[i].classList.add('empty_input');
+            verif = false;
+        }
+    }
+    for (var j in kidzz_input_question) {
+        console.log(kidzz_input_question[j]);
+        if(kidzz_input_question[j].value == ''){
+
+            kidzz_input_question[j].classList.add('empty_input');
+            verif = false;
+        }
+    }
+    for (var k in kidzz_input_answer) {
+        if(kidzz_input_answer[k].value == ''){
+            kidzz_input_answer[k].classList.add('empty_input');
+            verif = false;
+        }
+    }
+    for (var l in kidzz_input_explication) {
+        if(kidzz_input_explication[l].value == ''){
+            kidzz_input_explication[l].classList.add('empty_input');
+            verif = false;
+        }
+    }
+    return verif;
+}
+
+function verify_input_kidzz(item) {
+    if(item.value != '' && item.classList.contains('empty_input')){
+        item.classList.remove('empty_input');
+    }
+}
+
 function creer_kidzz(id) {
-    envoie_formulaire(recuperation_formulaire(id), creer_kidzz_callback, 'create_kidzz');
+    if(verify_kidzz()){
+        envoie_formulaire(recuperation_formulaire(id), creer_kidzz_callback, 'create_kidzz');
+    }else{
+        show_snack_bar('formulaire incomplet');
+    }
+
 }
 
 function creer_kidzz_callback(response) {
