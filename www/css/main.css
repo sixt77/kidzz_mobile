@@ -215,6 +215,7 @@ li {
     background: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.36);
     overflow: scroll;
+    scrollbar-width: none;
 }
 
 .container-main {
@@ -246,12 +247,14 @@ li {
 .scroll {
     overflow-y: scroll;
     height: calc(100vh - 130px);
+    scrollbar-width: none;
 }
 
 .scroll-list-kidzz {
     overflow-y: scroll;
     height: calc(100vh - 190px);
     padding: 30px 20px 0;
+    scrollbar-width: none;
 }
 
 #create_kidzz .scroll,
@@ -259,6 +262,7 @@ li {
     height: calc(100vh - 130px);
     padding: 20px 20px 10px;
     font-size: 20px;
+    scrollbar-width: none;
 }
 
 
@@ -272,6 +276,9 @@ h1 {
     font-size: 100px;
     height: calc(100vh - 330px);
     font-family: 'Comfortaa', sans-serif;
+}
+#home h1{
+    min-height: 110px;
 }
 
 h2 {
@@ -576,6 +583,7 @@ h2 {
     border-left-color: rgb(221, 221, 221);
     color: #32373c;
     border-radius: 5px;
+    text-align: center;
 }
 
 .kidzz_input:focus {
@@ -599,15 +607,19 @@ h2 {
 }
 
 .joueur_div {
-    width: 40%;
+    width: 48%;
+    height: 30px;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 5px 0px;
     background-color: aqua;
     border: 1px solid;
     border-radius: 3px;
-    margin: 5px;
     overflow: hidden;
     text-align: center;
+    margin-left: 1%;
+    float: left;
+    margin-right: 1%;
+    margin-bottom: 1px;
 }
 
 .selected {
@@ -631,14 +643,14 @@ h2 {
 
 .reponse_div {
     width: 50%;
-    height: calc((((100vh - 180px) / 5) * 3) / 2);
-    display: flex;
-    flex-direction: row;
+    height: 160px;
+    display: block;
     justify-content: center;
     align-items: center;
     font-size: 16px;
     flex-wrap: wrap;
     overflow: scroll;
+    scrollbar-width: none;
     padding: 15px 0px;
 }
 
@@ -659,26 +671,32 @@ h2 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    height: calc(((100vh - 180px) / 5) * 3);
+    height: 320px;
 }
 
 .answer_item {
     width: 100%;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    height: 35px;
+    overflow: hidden;
 }
 
 .kidzz_div {
     width: 100%;
-    height: calc((100vh - 180px) / 5);
+    min-height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     overflow: scroll;
+    scrollbar-width: none;
     padding: 10px 0;
+}
+#player_in_game_list{
+    display: block;
 }
 
 .question_item {
@@ -711,4 +729,11 @@ h2 {
     .home-container-log {
         height: auto;
     }
+}
+
+/*******************************
+           JS
+********************************/
+.hide_by_text{
+    display: none;
 }

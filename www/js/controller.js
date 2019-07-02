@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////toolbox//////////////////////////////////////////////////////////////////////////////////////////////
-function create_element($tag, $id, $class, $onclick, $html, $name, $required){
+function create_element($tag, $id, $class, $onclick, $html, $name, $required, $maxlenght){
     var item = document.createElement($tag);
     if($id != "" && $id != undefined)item.setAttribute("id", $id);
     if($class != "" && $class != undefined)item.setAttribute("class", $class);
@@ -7,6 +7,7 @@ function create_element($tag, $id, $class, $onclick, $html, $name, $required){
     if($html != "" && $html != undefined)item.innerHTML =$html;
     if($name != "" && $name != undefined)item.setAttribute("name", $name);
     if($required != "" && $required != undefined)item.setAttribute("required", 'required');
+    if($maxlenght != "" && $maxlenght != undefined)item.maxLength = $maxlenght;
     return item;
 }
 
@@ -20,7 +21,7 @@ function create_label($for, $id, $class, $onclick, $html){
     return item;
 }
 
-function create_input($type, $id, $class, $name, $required, $value, $cheked){
+function create_input($type, $id, $class, $name, $required, $value, $cheked, $maxlenght){
     var item = document.createElement("input");
     item.type = $type;
     if($id != "" && $id != undefined)item.setAttribute("id", $id);
@@ -28,7 +29,8 @@ function create_input($type, $id, $class, $name, $required, $value, $cheked){
     if($name != "" && $name != undefined)item.setAttribute("name", $name);
     if($required != "" && $required != undefined)item.setAttribute("required", 'required');
     if($value != "" && $value != undefined)item.setAttribute("value", $value);
-    if($cheked =  true && $cheked != undefined)item.checked = true;
+    if($cheked == true && $cheked != undefined)item.checked = true;
+    if($maxlenght != "" && $maxlenght != undefined)item.maxLength = $maxlenght;
     return item;
 }
 
@@ -263,6 +265,7 @@ function modifie_kidzz(id) {
 }
 
 function modifie_kidzz_callback(response) {
+    console.log(response);
     if(JSON.parse(response)[0] == true){
         sessionStorage.setItem('message', JSON.parse(response)[1]);
         document.location.href="manage_kidzz.html";

@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
+    <link href="css/font/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -46,15 +46,19 @@
                         <form id="question_form" action="index.php" method="post">
                             <label for="kidzz_name">
                                 <span>Nom du Kidzz</span>
-                                <input type="text" class="input-log" id="kidzz_name" name="nom" value="" required>
+                                <input type="text" class="input-log" id="kidzz_name" name="nom" value="" required maxlength="50">
                             </label>
 
                             <label for="kidzz_description">
                                 <span>Description</span>
-                                <input type='text' class="input-log" id="kidzz_description" name="description" value="" required>
+                                <input type='text' class="input-log" id="kidzz_description" name="description" value="" required maxlength="500">
                             </label>
 
                             <div id="question_area"></div>
+                            <label for="input-share" id="share">
+                                <input type="checkbox" class="disabled" id="input-share" name="share">
+                                <span style="width: 100%;border-radius: 3px;">Partager</span>
+                            </label>
                         </form>
                     </div>
 
@@ -65,10 +69,7 @@
                         <span class="">Ajouter une question</span>
                     </label>
 
-                    <label for="input-share" id="share">
-                        <input type="checkbox" class="disabled" id="input-share" name="share" checked>
-                        <span style="width: 100%;border-radius: 3px;">Partager</span>
-                    </label>
+
                 </div>
 
                 <input type="button" value="Modifier"  class="init-button button-create disable_offline" onclick="modifie_kidzz('question_form')">

@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/6720557cce.js"></script>
+    <link href="css/font/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Alegreya|Courgette|Martel|Roboto|Comfortaa&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -46,8 +46,11 @@
                 <div id="user_area">
                     <div id="joueur_1" class="user_form">
                         <span class="kidzz-title-joueur">Joueur 1 :</span>
-
-                        <input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required">
+                        <input type="text" id="joueur_1_name" class="joueur_text kidzz_input" name="joueur_1" required="required" maxlength="8">
+                    </div>
+                    <div id="joueur_2" class="user_form">
+                        <span class="kidzz-title-joueur">Joueur 2 :</span>
+                        <input type="text" id="joueur_2_name" class="joueur_text kidzz_input" name="joueur_2" required="required" maxlength="8">
                     </div>
                 </div>
             </div>
@@ -65,14 +68,10 @@
         </div>
 
         <div id="game" class="large_game_div scroll" style="display: none">
-            <div id="player_in_game_list" class=" droptarget kidzz_div"></div>
-
             <div id="question" class="kidzz_div"></div>
-
+            <div id="player_in_game_list" class=" droptarget kidzz_div"  onclick="move_player('start')"></div>
             <div id="reponse" class="answer_div"></div>
-
             <div id="explication" class="kidzz_div " style="display: none"></div>
-
             <input type="button" class="button-valided" value="Valider le tour !" onclick="valid_turn()">
         </div>
 
@@ -82,7 +81,7 @@
             <form id="rate_kidzz" action="index.php" method="post">
                 <label class="" for="favoris" style="position: initial;float: none;margin: 30px auto 0;">
                     <input class="" type="checkbox" id="favorite_checkbox" name="favoris" >
-                    <span class="">ajouter au favoris</span>
+                    <span class="">ajouter aux favoris</span>
                 </label>
                     <input id="rate+" type="radio" name="rate" value="+">
                     <input id="rate-" type="radio" name="rate" value="-">

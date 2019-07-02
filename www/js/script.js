@@ -8,7 +8,7 @@ function add_question(id, incr) {
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "question_"+incr, "question_form", "", ""));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "name-question", "", "Question n°"+incr+" :"));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom"));
-    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required"));
+    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required", "","", "50"));
 
 
     //ajout reponse
@@ -16,14 +16,14 @@ function add_question(id, incr) {
         document.getElementById("div_question_" + incr).appendChild(create_label("answer_"+i+"_"+incr+"_validity", "answer_"+i+"_"+incr, "label-container", "", ""));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("checkbox", "answer_"+i+"_"+incr+"_validity", "disabled", "answer_"+i+"_"+incr+"_validity", true));
         document.getElementById("answer_" + i + "_"+incr).appendChild(create_element("span", "", "", "", "Réponse "+i));
-        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "init-button input-answer","answer_"+i+"_"+incr, "required"));
+        document.getElementById("answer_" + i + "_"+incr).appendChild(create_input("text", "", "init-button input-answer","answer_"+i+"_"+incr, "required", "","","50"));
     }
 
 
     //ajout explication
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "form_explication_"+incr, "", "", ""));
     document.getElementById("form_explication_" + incr).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
-    document.getElementById("form_explication_" + incr).appendChild(create_element("textarea", "", "input-log question-explication-input", "", "", "question_"+incr+"_explication", "true"));
+    document.getElementById("form_explication_" + incr).appendChild(create_element("textarea", "", "input-log question-explication-input", "", "", "question_"+incr+"_explication", "true", "500"));
 
     if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_question").appendChild(create_element("LI", "form_delete_button", "form_delete_button", "", ""));
@@ -49,21 +49,22 @@ function delete_question(){
 function fill_kidzz(kidzz) {
     document.getElementById('kidzz_name').value = kidzz['nom'];
     document.getElementById('kidzz_description').value = kidzz['description'];
+    if( kidzz['partageable'] == 1){
+        document.getElementById('input-share').checked = true;
+    }
 }
 
 
 //ajout de question a la modification de kidzz
 function fill_question(id) {
-
     for(var i = 0; i < items.length; i++){
-
         document.getElementById(id).appendChild(create_element("div", "div_question_" + (i+1), "", "", ""));
 
         //ajout question
         document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "question_"+(i+1), "question_form", "", ""));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "name-question", "", "Question n°"+(i+1)+" :"));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "", "", "Nom"));
-        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur']));
+        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur'], "", "50"));
 
 
         //ajout reponse
@@ -74,16 +75,14 @@ function fill_question(id) {
             }else{
                 document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("checkbox", "answer_"+(j+1)+"_"+(i+1)+"_validity", "disabled","answer_"+(j+1)+"_"+(i+1)+"_validity", ""));
             }
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+" :"));
-            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "init-button input-answer","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur']));
-
-
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_element("span", "", "", "", "Réponse "+(j+1)+""));
+            document.getElementById("answer_" + (j+1) + "_" + (i+1)).appendChild(create_input("text", "", "init-button input-answer","answer_"+(j+1)+"_"+(i+1), "required", items[i]['answer'][j]['valeur'], "", "50"));
         }
 
         //ajout explication
         document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "form_explication_"+(i+1), "", "", ""));
         document.getElementById("form_explication_" + (i+1)).appendChild(create_element("span", "", "name-question question-explication", "", "Explication"));
-        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("textarea", "", "input-log question-explication-input", "", items[i]['info']['explication'], "question_"+(i+1)+"_explication", "true"));
+        document.getElementById("form_explication_" + (i+1)).appendChild(create_element("textarea", "", "input-log question-explication-input", "", items[i]['info']['explication'], "question_"+(i+1)+"_explication", "true", "500"));
 
 
         if(count_class("question_form")>1 && count_class("form_delete_button") === 0) {
@@ -99,9 +98,9 @@ function fill_question(id) {
 //ajout de joueur au lancement du jeux
 function add_user(id, incr) {
     //ajout joueur
-    document.getElementById(id).appendChild(create_element("LI", "joueur_" + incr, "user_form", "", "joueur " + incr + " :"));
-    document.getElementById("joueur_" + incr).appendChild(create_element("label", "form_label_" + incr, "", "", ""));
-    document.getElementById("joueur_" + incr).appendChild(create_input("text", "joueur_"+incr+"_name", "joueur_text kidzz_input", "joueur_" + incr, "required"));
+    document.getElementById(id).appendChild(create_element("div", "joueur_" + incr, "user_form", "", ""));
+    document.getElementById("joueur_" + incr).appendChild(create_element("span", "form_label_" + incr, "kidzz-title-joueur", "", "joueur " + incr + " :"));
+    document.getElementById("joueur_" + incr).appendChild(create_input("text", "joueur_"+incr+"_name", "joueur_text kidzz_input", "joueur_" + incr, "required", "", "", '8'));
     if(count_class("user_form")>1 && count_class("form_delete_button") === 0) {
         document.getElementById("remove_user").appendChild(create_element("LI", "form_delete_button", "form_delete_button ", "", ""));
         document.getElementById("form_delete_button").appendChild(create_button("button", "kidzz_button", "-", "delete_user()"));
@@ -198,7 +197,15 @@ function select_player(id){
 function move_player(id){
     player = document.getElementsByClassName('selected');
     for(var i = 0; i < player.length; i++){
-        document.getElementById('answer_'+id).append(player[i]);
+        if(id != 'start'){
+            if(player[i].parentElement.id != "answer_" + id) {
+                document.getElementById('answer_' + id).append(player[i]);
+            }
+        }else{
+            if(player[i].parentElement.id != "player_in_game_list"){
+                document.getElementById('player_in_game_list').append(player[i]);
+            }
+        }
     }
 }
 
