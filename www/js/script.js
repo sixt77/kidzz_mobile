@@ -186,7 +186,7 @@ function valid_turn() {
 
 //verifie les réponse et ajoute les point
 function count_point(){
-    div_list = document.getElementsByClassName("reponse_div");
+    div_list = document.getElementsByClassName("answer_item_list_joueur");
     for(var i = 0; i < div_list.length; i++){
         if(items[incr]['answer'][i]['valide'] == 1){
             player_list_by_div = div_list[i].childNodes;
