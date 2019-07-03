@@ -255,8 +255,6 @@ function end_game() {
     if(kidzz['favoris'] == true){
         document.getElementById('favorite_checkbox').checked = true;
     }
-    console.log(kidzz);
-
     display_player_list_with_score(player_list, "player_list_end_game");
 
 }

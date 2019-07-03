@@ -603,10 +603,12 @@ h2 {
     background-color: #ffc048;
 }
 
-#kidzz_selection_me .kidzz_div_list_item_name {
+
+#kidzz_selection_favorite .kidzz_div_list_item_name, #kidzz_selection_online .kidzz_div_list_item_name, #kidzz_selection_me .kidzz_div_list_item_name {
     width: calc(100% - 120px);
     margin: 0 auto;
 }
+
 
 .kidzz_div_list_item_note {
     width: 100%;

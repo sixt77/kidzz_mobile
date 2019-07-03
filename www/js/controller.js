@@ -354,6 +354,13 @@ function recuperation_kidzz_en_ligne_callback(response) {
         kidzz = response;
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
+            if(response[i]['favoris'] == true){
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+            }else{
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+            }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
@@ -367,7 +374,6 @@ function recuperation_kidzz_en_ligne_callback(response) {
 
 //choix du kidzz dans les kidzz de l'utilisateur
 function recuperation_mes_kidzz() {
-    console.log(network);
     if(network == true){
         console.log("mode en ligne");
         recuperation_en_ligne_mes_kidzz();
@@ -384,15 +390,17 @@ function recuperation_en_ligne_mes_kidzz_callback(response) {
     response = JSON.parse(response);
     if(response[0] == true){
         response = response[1];
+        console.log(response);
         kidzz = response;
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
-
-            // Etoile remplie (il est en favoris)
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
-            // Etoile non rempliz (il n'est pas en favoris)
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
-
+            if(response[i]['favoris'] == true){
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+            }else{
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+            }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
@@ -419,6 +427,13 @@ function recuperation_hors_ligne_mes_kidzz() {
     kidzz = response;
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
+        if(response[i]['favoris'] == true){
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+        }else{
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+        }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
@@ -447,6 +462,13 @@ function recuperation_en_ligne_kidzz_favoris_callback(response) {
         kidzz = response;
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
+            if(response[i]['favoris'] == true){
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+            }else{
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+            }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
@@ -473,6 +495,13 @@ function recuperation_hors_ligne_kidzz_favoris() {
     kidzz = response;
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
+        if(response[i]['favoris'] == true){
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+        }else{
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+        }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
@@ -570,6 +599,33 @@ function reporter_kidzz_callback(response) {
     }
 }
 
+//ajout en favoris
+function ajouter_favoris(id){
+    envoie_formulaire(recuperation_session(), ajouter_favoris_callback, 'add_kidzz_to_favorite', '&id_kidzz='+id);
+}
+
+function ajouter_favoris_callback(response){
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        location.reload();
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
+}
+
+//retrait favoris
+function retirer_favoris(id){
+    envoie_formulaire(recuperation_session(), ajouter_favoris_callback, 'remove_kidzz_to_favorite', '&id_kidzz='+id);
+}
+
+function retirer_favoris_callback(response){
+    if(JSON.parse(response)[0] == true){
+        sessionStorage.setItem('message', JSON.parse(response)[1]);
+        location.reload();
+    }else{
+        show_snack_bar(JSON.parse(response)[1]);
+    }
+}
 
 //mode hors ligne
 //verification
