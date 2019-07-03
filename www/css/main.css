@@ -500,9 +500,18 @@ h2 {
     justify-content: space-around;
 }
 
-.button_all_kizz {
-    width: 30%;
+.button_all_play {
+    width: 50%;
 }
+
+.button_all_minus {
+    width: 25%;
+}
+
+.button_all_plus {
+    width: 25%;
+}
+
 
 /*******************************
             INPUT
@@ -781,9 +790,9 @@ h2 {
 }
 
 .game_div {
-    width: 320px;
+    max-width: 320px;
     margin: 0px auto;
-    padding: 15px 0;
+    padding: 20px 30px;
     overflow: scroll;
     height: calc(100vh - 120px);
 }
@@ -878,7 +887,7 @@ h2 {
 }
 
 .explication_div {
-    padding: 0px 20px;
+    padding: 0 20px;
     word-break: break-word;
 }
 
