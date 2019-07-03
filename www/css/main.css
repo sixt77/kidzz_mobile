@@ -387,10 +387,9 @@ h2 {
     height: 50px;
     background-color: #1e272e;
     font-size: 28px;
-    border-top: 1px solid;
     position: fixed;
     bottom: 60px;
-    color:white;
+    color: #fff;
 }
 
 .button-del {
@@ -551,7 +550,6 @@ h2 {
     width: 25%;
 }
 
-
 .label-rate #rate_down + i {
     font-size: 50px;
     text-align: center;
@@ -654,7 +652,7 @@ h2 {
 .kidzz_div_list_item_name {
     width: calc(100% - 60px);
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     height: 60px;
     border-bottom: 1px solid #000;
     display: flex;
@@ -684,7 +682,7 @@ h2 {
     min-height: 80px;
     line-height: 18px;
     font-size: 18px;
-    padding: 10px 15px 0;
+    padding: 15px 15px 0;
     color: #fff;
 }
 
@@ -747,7 +745,7 @@ h2 {
     height: 30px;
     font-size: 14px;
     padding: 5px 0px;
-    background-color: #575fcf;
+    background-color: #3c40c6;
     border: 1px solid #000;
     border-radius: 3px;
     overflow: hidden;
@@ -757,7 +755,7 @@ h2 {
 }
 
 .selected {
-    background-color: #3c40c6;
+    background-color: #575fcf;
 }
 
 .user_form {
@@ -804,8 +802,13 @@ h2 {
     text-align: center;
     margin-bottom: 0;
     height: 60px;
-    word-wrap: break-word;
-    padding: 5px 20px;
+    padding: 8px 20px;
+    color: #fff;
+    background-color: #3c40c6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
 }
 
 .answer_item_list_joueur {
@@ -819,20 +822,19 @@ h2 {
 
 .kidzz_div {
     width: 100%;
-    /* min-height: 60px; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    padding: 15px 10px;
 }
 
 #player_in_game_list {
 }
 
 .kidzz_player_game {
-    min-height: calc(100vh - 690px);
-    padding: 2px;
+    padding: 10px 10px 20px;
 }
 
 .question_item {
@@ -852,8 +854,7 @@ h2 {
 }
 
 .explication_div {
-    margin-top: 20px;
-    padding: 15px 40px;
+    padding: 0px 20px;
     word-break: break-word;
 }
 
