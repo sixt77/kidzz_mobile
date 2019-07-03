@@ -217,7 +217,7 @@ input:focus {
 }
 
 #home .container-title {
-    padding: 25px 20px;
+    padding: 30px 20px;
 }
 
 .container-menu {
@@ -285,7 +285,7 @@ h2 {
     color: #fff;
     font-weight: 900;
     width: calc(100% - 50px);
-    padding-top: 10px;
+    padding-top: 8px;
 }
 
 #home h2 {
