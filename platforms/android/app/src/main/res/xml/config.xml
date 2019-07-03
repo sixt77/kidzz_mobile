@@ -12,7 +12,7 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
-    <name>kidzz</name>
+    <name>Kidzz</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
