@@ -41,59 +41,56 @@
             </div>
         </div>
 
-        <div>
-            <div  id="kidzz_list" class="scroll">
-                <div class="">
-                    <div class="">
-                        <form id="question_form" action="index.php" method="post">
-                            <label for="kidzz_name">
-                                <span>Nom du Kidzz</span>
-                                <input type="text" class="input-log" id="kidzz_name" name="nom" value="" required maxlength="30" oninput="verify_input_kidzz(this)">
-                            </label>
+        <div  id="kidzz_list" class="scroll">
+            <form id="question_form" action="index.php" method="post">
+                <label for="kidzz_name">
+                    <span>Nom du Kidzz</span>
+                    <input type="text" class="input-log" id="kidzz_name" name="nom" value="" required maxlength="30" oninput="verify_input_kidzz(this)">
+                </label>
 
-                            <label for="kidzz_description">
-                                <span>Description</span>
-                                <input type='text' class="input-log" id="kidzz_description" name="description" value="" required maxlength="100"  oninput="verify_input_kidzz(this)">
-                            </label>
+                <label for="kidzz_description">
+                    <span>Description</span>
+                    <input type='text' class="input-log" id="kidzz_description" name="description" value="" required maxlength="100"  oninput="verify_input_kidzz(this)">
+                </label>
 
-                            <div id="question_area">
-                                <div id="div_question_1">
-                                    <div id="question_1" class="question_form">
-                                        <div class="name-question">Question n°1 :</div>
-                                        <div>Nom</div>
-                                        <input type="text" class="input-question" name="question_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
-                                    </div>
+                <div id="question_area">
+                    <div id="div_question_1">
+                        <div id="question_1" class="question_form">
+                            <div class="name-question">Question n°1 :</div>
+                            <div>Nom</div>
+                            <input type="text" class="input-question" name="question_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
+                        </div>
 
-                                    <label class="label-container" for="answer_1_1_validity" id="answer_1_1">
-                                        <input type="checkbox" class="disabled" name="answer_1_1_validity" id="answer_1_1_validity">
-                                        <span>Réponse 1</span>
-                                        <input type="text" class="init-button input-answer" name="answer_1_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
-                                    </label>
+                        <label class="label-container" for="answer_1_1_validity" id="answer_1_1">
+                            <input type="checkbox" class="disabled" name="answer_1_1_validity" id="answer_1_1_validity">
+                            <span>Réponse 1</span>
+                            <input type="text" class="init-button input-answer" name="answer_1_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
+                        </label>
 
-                                    <label class="label-container" for="answer_2_1_validity" id="answer_2_1">
-                                        <input type="checkbox" class="disabled" name="answer_2_1_validity" id="answer_2_1_validity">
-                                        <span>Réponse 2</span>
-                                        <input type="text" class="init-button input-answer" name="answer_2_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
-                                    </label>
+                        <label class="label-container" for="answer_2_1_validity" id="answer_2_1">
+                            <input type="checkbox" class="disabled" name="answer_2_1_validity" id="answer_2_1_validity">
+                            <span>Réponse 2</span>
+                            <input type="text" class="init-button input-answer" name="answer_2_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
+                        </label>
 
-                                    <label class="label-container" for="answer_3_1_validity" id="answer_3_1">
-                                        <input type="checkbox" class="disabled" name="answer_3_1_validity" id="answer_3_1_validity">
-                                        <span>Réponse 3</span>
-                                        <input type="text" class="init-button input-answer" name="answer_3_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
-                                    </label>
+                        <label class="label-container" for="answer_3_1_validity" id="answer_3_1">
+                            <input type="checkbox" class="disabled" name="answer_3_1_validity" id="answer_3_1_validity">
+                            <span>Réponse 3</span>
+                            <input type="text" class="init-button input-answer" name="answer_3_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
+                        </label>
 
-                                    <label class="label-container" for="answer_4_1_validity" id="answer_4_1">
-                                        <input type="checkbox" class="disabled" name="answer_4_1_validity" id="answer_4_1_validity">
-                                        <span>Réponse 4</span>
-                                        <input type="text" class="init-button input-answer" name="answer_4_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
-                                    </label>
+                        <label class="label-container" for="answer_4_1_validity" id="answer_4_1">
+                            <input type="checkbox" class="disabled" name="answer_4_1_validity" id="answer_4_1_validity">
+                            <span>Réponse 4</span>
+                            <input type="text" class="init-button input-answer" name="answer_4_1" required="required" maxlength="50"  oninput="verify_input_kidzz(this)">
+                        </label>
 
-                                    <div id="form_explication_1">
-                                        <span class="name-question question-explication">Explication</span>
-                                        <textarea class="input-log question-explication-input" name="question_1_explication" required="required" maxlength="300" oninput="verify_input_kidzz(this)"></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="form_explication_1">
+                            <span class="name-question question-explication">Explication</span>
+                            <textarea class="input-log question-explication-input" name="question_1_explication" required="required" maxlength="300" oninput="verify_input_kidzz(this)"></textarea>
+                        </div>
+                    </div>
+                </div>
                             <label for="input-share" id="share">
                                 <input type="checkbox" class="disabled" id="input-share" name="share" checked>
                                 <span style="width: 100%;border-radius: 3px;">Partager</span>
@@ -109,12 +106,9 @@
                     </label>
 
 
-                </div>
-
-                <input type="button" value="Créer" class="init-button button-create disable_offline" onclick="creer_kidzz('question_form')">
-            </div>
-        </div>
+        <input type="button" value="Créer" class="init-button button-create disable_offline" onclick="creer_kidzz('question_form')">
     </div>
+
 
     <div class="container-menu">
         <a href="home.html">
