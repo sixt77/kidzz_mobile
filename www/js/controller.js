@@ -131,7 +131,6 @@ function affichage_login() {
 
 //connexion
 function connexion(login, password) {
-    console.log(login, password);
     identification(login, password, connexion_callback);
 }
 
@@ -225,7 +224,6 @@ function verify_kidzz() {
     kidzz_input_question = document.getElementsByClassName('input-question');
     kidzz_input_answer = document.getElementsByClassName('input-answer');
     kidzz_input_explication = document.getElementsByClassName('question-explication-input');
-    console.log(kidzz_input_question);
     verif = true;
     for (var i in kidzz_input_log) {
         if(kidzz_input_log[i].value == ''){
@@ -259,7 +257,6 @@ function verify_question() {
     verif = true;
     var i = 0;
     $loop = 1;
-    console.log("question ",question.length);
     while(i < question.length){
         if(question[i].nodeName == 'DIV'){
             count = 0;
@@ -407,10 +404,8 @@ function recuperation_kidzz_en_ligne_callback(response) {
 //choix du kidzz dans les kidzz de l'utilisateur
 function recuperation_mes_kidzz() {
     if(network == true){
-        console.log("mode en ligne");
         recuperation_en_ligne_mes_kidzz();
     }else{
-        console.log("mode hors ligne");
         recuperation_hors_ligne_mes_kidzz();
     }
 }
@@ -422,7 +417,6 @@ function recuperation_en_ligne_mes_kidzz_callback(response) {
     response = JSON.parse(response);
     if(response[0] == true){
         response = response[1];
-        console.log(response);
         kidzz = response;
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
@@ -476,10 +470,8 @@ function recuperation_hors_ligne_mes_kidzz() {
 //choix du kidzz dans les favoris de l'utilisateur
 function recuperation_kidzz_favoris() {
     if(network == true){
-        console.log("mode en ligne");
         recuperation_en_ligne_kidzz_favoris();
     }else{
-        console.log("mode hors ligne");
         recuperation_hors_ligne_kidzz_favoris();
     }
 }
@@ -549,10 +541,8 @@ function choix_kidzz(id) {
 
 function preparation_jeux() {
     if(network){
-        console.log("mode en ligne");
         preparation_en_ligne_jeux();
     }else{
-        console.log("mode hors ligne");
         preparation_hors_ligne_jeux();
     }
 

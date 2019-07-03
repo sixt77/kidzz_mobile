@@ -120,7 +120,6 @@ function delete_user(){
     if(nb===2 || nb < 2){
         remove_id("form_delete_button");
     }
-    console.log(count_class("user_form"), document.getElementById('addUser').classList.contains('hidden')   );
     if(count_class("user_form")<=7 && document.getElementById('addUser').classList.contains('hidden')){
         document.getElementById('addUser').classList.remove('hidden');
     }
@@ -308,7 +307,6 @@ function display_player_list_with_score(player_list, div) {
 //trie des kidzz
 function sort_kidzz(str, array, classe) {
     var j = 0;
-    console.log(array);
     var array2 = new Array();
     for(var i in array){
         if(array[i]['nom'].toLowerCase().includes(str.toLowerCase())||array[i]['description'].toLowerCase().includes(str.toLowerCase())){
