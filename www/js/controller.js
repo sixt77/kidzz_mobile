@@ -170,6 +170,7 @@ function inscription(id) {
 
 //inscription callback
 function inscription_callback(response) {
+    console.log(response);
     if(response !== null && response[0] !== undefined && JSON.parse(response) != false){
         sessionStorage.setItem('utilisateur', JSON.stringify(response));
         localStorage.setItem('utilisateur', JSON.stringify(response));
@@ -717,6 +718,7 @@ function recuperation_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {
+    console.log(response);
     response = JSON.parse(response);
     if(response[0] == true){
         if(response.length < 2000000) {
