@@ -102,7 +102,7 @@ function add_user(id, incr) {
     document.getElementById("joueur_" + incr).appendChild(create_element("span", "form_label_" + incr, "kidzz-title-joueur", "", "joueur " + incr + " :"));
     document.getElementById("joueur_" + incr).appendChild(create_input("text", "joueur_"+incr+"_name", "joueur_text kidzz_input", "joueur_" + incr, "required", "", "", '8'));
     if(count_class("user_form")>1 && count_class("form_delete_button") === 0) {
-        document.getElementById("remove_user").appendChild(create_element("LI", "form_delete_button", "form_delete_button ", "", ""));
+        document.getElementById("remove_user").appendChild(create_element("div", "form_delete_button", "form_delete_button ", "", ""));
         document.getElementById("form_delete_button").appendChild(create_button("button", "kidzz_button", "-", "delete_user()"));
     }
     if(count_class("user_form")>7 && count_class("add_user_button")==1){
