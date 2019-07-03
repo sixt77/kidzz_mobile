@@ -227,8 +227,6 @@ document.ondragstart = function() {
     event.dataTransfer.setData("Text", event.target.id);
 };
 
-
-
 /* Events fired on the drop target */
 document.ondragover = function() {
     event.preventDefault();
