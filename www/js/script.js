@@ -8,7 +8,7 @@ function add_question(id, incr) {
     document.getElementById("div_question_" + incr).appendChild(create_element("div", "question_"+incr, "question_form", "", ""));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "name-question", "", "Question n°"+incr+" :"));
     document.getElementById("question_" + incr).appendChild(create_element("div", "", "", "", "Nom"));
-    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required", "","", "50", 'verify_input_kidzz(this)'));
+    document.getElementById("question_" + incr).appendChild(create_input("text", "", "input-question","question_"+incr, "required", "","", "150", 'verify_input_kidzz(this)'));
 
 
     //ajout reponse
@@ -64,7 +64,7 @@ function fill_question(id) {
         document.getElementById("div_question_" + (i+1)).appendChild(create_element("div", "question_"+(i+1), "question_form", "", ""));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "name-question", "", "Question n°"+(i+1)+" :"));
         document.getElementById("question_" + (i+1)).appendChild(create_element("div", "", "", "", "Nom"));
-        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur'], "", "50", 'verify_input_kidzz(this)'));
+        document.getElementById("question_" + (i+1)).appendChild(create_input("text", "", "input-question","question_"+(i+1), "required", items[i]['info']['valeur'], "", "150", 'verify_input_kidzz(this)'));
 
 
         //ajout reponse
