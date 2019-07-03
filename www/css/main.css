@@ -36,6 +36,7 @@ li {
     border: 0;
     background-color: #1e272e;
     color: #fff;
+    height: 60px;
 }
 
 #manage_kidzz .searchBar {
@@ -214,10 +215,12 @@ input:focus {
     background-color: #3c40c6;
     z-index: 10;
     position: relative;
+    height: 60px;
 }
 
 #home .container-title {
-    padding: 30px 20px;
+    height: 110px;
+    padding: 25px 20px;
 }
 
 .container-menu {
@@ -226,6 +229,7 @@ input:focus {
     padding: 15px 20px;
     justify-content: space-around;
     background-color: #3c40c6;
+    height: 60px;
 }
 
 .container-form-button {
@@ -285,7 +289,7 @@ h2 {
     color: #fff;
     font-weight: 900;
     width: calc(100% - 50px);
-    padding-top: 8px;
+    padding-top: 10px;
 }
 
 #home h2 {
@@ -348,7 +352,6 @@ h2 {
     justify-content: center;
     color: #fff;
     font-family: 'Comfortaa', sans-serif;
-    padding-top: 20px;
 }
 
 .button-manage-plus {
