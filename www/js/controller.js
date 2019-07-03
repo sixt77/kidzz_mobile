@@ -102,8 +102,8 @@ function count_class($class){
 function show_snack_bar(text) {
     var x = document.getElementById("snackbar");
     x.innerHTML = text;
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
+    x.classList.add("show");
+    setTimeout(function(){ x.classList.remove("show"); }, 4000);
 }
 
 function recuperation_formulaire(id) {

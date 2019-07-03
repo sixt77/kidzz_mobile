@@ -66,20 +66,19 @@ input:focus {
         transform: translateY(0px);
     }
 
-    25% {
+    35% {
         transform: translateY(50px);
     }
 
-    75% {
+    65% {
         transform: translateY(50px);
     }
 
 
     100% {
-        transform: translateY(-50px);
+        transform: translateY(0px);
     }
 }
-
 
 
 /*******************************
@@ -111,7 +110,6 @@ input:focus {
 ********************************/
 
 
-/* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
     visibility: hidden;
     width: 100%;
@@ -188,6 +186,10 @@ input:focus {
 
 .home-container {
     background-color: #3c40c6;
+}
+
+.home-container-title {
+    position: relative;
 }
 
 .home-container-log {
@@ -890,13 +892,13 @@ h2 {
     display: none;
 }
 
-.empty_input{
+.empty_input {
     border-color: red;
     border-style: groove;
     border-width: 1px;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
