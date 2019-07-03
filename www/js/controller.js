@@ -603,6 +603,7 @@ function noter_kidzz(id) {
 }
 
 function noter_kidzz_callback(response) {
+    console.log(response);
     if(JSON.parse(response)[0] == true){
         sessionStorage.setItem('message', JSON.parse(response)[1]);
         document.location.href="home.html";
