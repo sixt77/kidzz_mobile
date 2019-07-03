@@ -182,6 +182,7 @@ function valid_turn() {
         incr++;
         game_turn(incr);
     }
+    ScrollTotop('game');
 }
 
 //verifie les réponse et ajoute les point

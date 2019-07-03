@@ -117,6 +117,10 @@ function ScrollToBottom($id) {
     document.getElementById($id).scrollTo(0,document.getElementById($id).scrollHeight);
 }
 
+function ScrollTotop($id) {
+    document.getElementById($id).scrollTo(0,0);
+}
+
 ////////////////////////////////////////////////////////application//////////////////////////////////////////////////////////////////////////////////////////////
 
 
