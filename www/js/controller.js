@@ -589,12 +589,12 @@ function mode_en_ligne() {
         classe[i].onclick = "";
     }
     network = true;
+    remove_class_by_class("disable_offline", "offline_mode");
 }
 
 
 //mode hors ligne
 function mode_hors_ligne() {
-    console.log('ok');
     sessionStorage.setItem('network', 'false');
     disable_by_class("disable_offline");
     classe = document.getElementsByClassName("link_disable_offline");
@@ -602,6 +602,7 @@ function mode_hors_ligne() {
         classe[i].onclick = function() {return false;};
     }
     network = false;
+    add_class_by_class("disable_offline", "offline_mode");
 }
 
 //verification des données hors ligne

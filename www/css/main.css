@@ -807,6 +807,6 @@ h2 {
     display: none;
 }
 
-.disable_offline {
+.offline_mode {
     color: #967b7b;
 }
