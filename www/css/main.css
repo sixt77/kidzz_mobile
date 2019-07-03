@@ -176,14 +176,14 @@ input:focus {
 
 
 .home-container {
-    background-color: #1e272e;
+    background-color: #3c40c6;
 }
 
 .home-container-log {
     margin-left: 0;
     height: 330px;
     padding: 30px 20px;
-    background: #fff8c4;
+    background: #efecdb;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.36);
     overflow: scroll;
     scrollbar-width: none;

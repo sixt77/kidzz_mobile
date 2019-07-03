@@ -256,15 +256,20 @@ function verify_question() {
     question = document.getElementById('question_area').childNodes;
     verif = true;
     var i = 0;
+    $loop = 1;
+    console.log("question ",question.length);
     while(i < question.length){
-        count = 0;
-        for (var j = 1; j < 5; j++) {
-            if(document.getElementById('answer_'+j+'_'+(i+1)+'_validity').checked == true){
-                count++;
+        if(question[i].nodeName == 'DIV'){
+            count = 0;
+            for (var j = 1; j < 5; j++) {
+                if(document.getElementById('answer_'+j+'_'+($loop)+'_validity').checked == true){
+                    count++;
+                }
             }
-        }
-        if(count == 0){
-            verif = false;
+            if(count == 0){
+                verif = false;
+            }
+            $loop++;
         }
         i++;
     }
