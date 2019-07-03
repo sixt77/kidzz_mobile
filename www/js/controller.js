@@ -103,7 +103,7 @@ function show_snack_bar(text) {
     var x = document.getElementById("snackbar");
     x.innerHTML = text;
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
 }
 
 function recuperation_formulaire(id) {
