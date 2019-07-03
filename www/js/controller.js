@@ -101,8 +101,8 @@ function count_class($class){
 
 function show_snack_bar(text) {
     var x = document.getElementById("snackbar");
-    x.className = "show";
     x.innerHTML = text;
+    x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
