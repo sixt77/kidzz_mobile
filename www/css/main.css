@@ -61,12 +61,22 @@ input:focus {
 
 
 @keyframes AnimationSnackbar {
+
     0% {
-        transform: translateY(-50px);
+        transform: translateY(0px);
     }
 
-    50% {
+    25% {
         transform: translateY(50px);
+    }
+
+    75% {
+        transform: translateY(50px);
+    }
+
+
+    100% {
+        transform: translateY(-50px);
     }
 }
 
@@ -109,18 +119,19 @@ input:focus {
     color: #fff;
     text-align: center;
     border-radius: 0 0 5px 5px;
-    padding: 16px;
+    padding: 15px;
     position: fixed;
     z-index: 1;
     top: 60px;
     text-transform: uppercase;
     font-size: 20px;
+    transition-timing-function: ease;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackbar.show {
-    animation: AnimationSnackbar 2.5s;
-    transition-timing-function: ease-in-out;
+    animation: AnimationSnackbar 4s;
+    transition-timing-function: ease;
     visibility: visible; /* Show the snackbar */
 }
 
