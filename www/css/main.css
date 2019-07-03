@@ -765,6 +765,8 @@ h2 {
     width: 320px;
     margin: 0px auto;
     padding: 15px 0;
+    overflow: scroll;
+    height: calc(100vh - 170px);
 }
 
 .large_game_div {
@@ -821,6 +823,7 @@ h2 {
 
 #player_list {
     height: calc(100vh - 360px);
+    min-height: 250px;
     overflow-y: scroll;
 }
 
