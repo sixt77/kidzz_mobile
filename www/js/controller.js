@@ -280,7 +280,11 @@ function verify_input_kidzz(item) {
 
 function creer_kidzz(id) {
     if(verify_kidzz()){
-        envoie_formulaire(recuperation_formulaire(id), creer_kidzz_callback, 'create_kidzz');
+        if(verify_question()){
+            envoie_formulaire(recuperation_formulaire(id), creer_kidzz_callback, 'create_kidzz');
+        }else{
+            show_snack_bar('il faut au moins une réponse valide à toutes les questions');
+        }
     }else{
         show_snack_bar('formulaire incomplet');
     }
@@ -343,7 +347,6 @@ function modifie_kidzz(id) {
 }
 
 function modifie_kidzz_callback(response) {
-    console.log(response);
     if(JSON.parse(response)[0] == true){
         sessionStorage.setItem('message', JSON.parse(response)[1]);
         document.location.href="manage_kidzz.html";
