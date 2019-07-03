@@ -603,7 +603,6 @@ function noter_kidzz(id) {
 }
 
 function noter_kidzz_callback(response) {
-    console.log(response);
     if(JSON.parse(response)[0] == true){
         sessionStorage.setItem('message', JSON.parse(response)[1]);
         document.location.href="home.html";
@@ -698,6 +697,7 @@ function verification_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), verification_kidzz_hors_ligne_callback, 'check_offline_kidzz');
 }
 function verification_kidzz_hors_ligne_callback(response) {
+    console.log(response);
     response = JSON.parse(response);
     if(response[0] == true){
         $local_data = JSON.parse(localStorage.getItem("kidzz_list"));
