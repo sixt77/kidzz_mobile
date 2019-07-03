@@ -35,10 +35,6 @@
     <div id="play_kidzz" class="container-main">
         <div class="container-title">
             <h2>Jouer</h2>
-
-            <div class="container-form-button">
-                <i class="fas fa-power-off" onclick="deconnexion()"></i>
-            </div>
         </div>
 
         <div id="game_setup"  class="game_div">
@@ -55,16 +51,17 @@
                 </div>
             </div>
 
-            <div class="">
-                <label class="" for="addUser">
+            <div id="button_all_kizz">
+                <div class="button_all_kizz button_all_plus">
                     <input id="addUser" class="kidzz_button add_user_button" type="button" onclick="add_user('user_area', count_class('user_form')+1)" value="+">
-                </label>
+                </div>
+
+                <div class="button_all_kizz button_all_play">
+                    <input type="button" class="kidzz_button" value="Lancer" onclick="start_game()">
+                </div>
+
+                <div id="button_all_minus" class="button_all_kizz button_all_minus"></div>
             </div>
-
-            <div id="remove_user"></div>
-
-            <input type="button" class="kidzz_button" value="Lancer" onclick="start_game()">
-
         </div>
 
         <div id="game" class="large_game_div scroll" style="display: none">
