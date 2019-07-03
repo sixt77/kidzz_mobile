@@ -84,14 +84,14 @@
                     <span class="">Ajouter aux favoris</span>
                 </label>
 
-                <label class="label-rate" for="rate_down">
+                <label class="label-rate" for="rate_down" style="margin-left: 25%">
                     <input id="rate_down" type="radio" class="disabled" name="rate" value="">
-                    <i class="fas fa-thumbs-down"></i>
+                    <i class="fas fa-minus"></i>
                 </label>
 
-                <label class="label-rate" for="rate_up">
+                <label class="label-rate" for="rate_up"  style="margin-right: 25%">
                     <input id="rate_up" type="radio" class="disabled" name="rate" value="">
-                    <i class="fas fa-thumbs-up"></i>
+                    <i class="fas fa-plus"></i>
                 </label>
 
             </form>
@@ -99,7 +99,7 @@
             <input type="button" value="Noter"  class="init-button button-note disable_offline" onclick="noter_kidzz('rate_kidzz')">
 
             <form id="report_kidzz" action="index.php" method="post">
-                <textarea class="input-log question-explication-input" name="motif" required></textarea>
+                <textarea class="input-log question-explication-input" name="motif" required maxlength="400"></textarea>
             </form>
 
             <input type="button" value="Reporter !"  class="button-report disable_offline" onclick="reporter_kidzz('report_kidzz')">

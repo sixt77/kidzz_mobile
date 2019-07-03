@@ -467,7 +467,8 @@ h2 {
     margin: 0px auto 20px;
     padding: 9px 15px;
     font-size: 20px;
-    background-color: aquamarine;
+    background-color: #575fcf;
+    color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -478,7 +479,8 @@ h2 {
     margin: 15px auto 25px;
     padding: 9px 15px;
     font-size: 20px;
-    background-color: aquamarine;
+    background-color: #575fcf;
+    color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -546,8 +548,9 @@ h2 {
 .label-rate {
     float: left;
     padding: 20px 0 30px;
-    width: 50%;
+    width: 25%;
 }
+
 
 .label-rate #rate_down + i {
     font-size: 50px;
@@ -566,7 +569,7 @@ h2 {
 }
 
 .label-rate #rate_up:checked + i {
-    color: #5b9dd9;
+    color: #3c40c6;
 }
 
 .label-favoris {
@@ -581,12 +584,15 @@ h2 {
     padding: 10px 0;
     text-align: center;
     font-size: 20px;
-    background-color: bisque;
     margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: #EA2027;
+    color: white;
 }
 
 .input-favoris:checked + span {
-    background-color: aquamarine;
+    background-color: #3c40c6;
 }
 
 #create_kidzz input[type="checkbox"] + span,

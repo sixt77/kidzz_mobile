@@ -175,7 +175,7 @@ function valid_turn() {
         display_player_list_with_score(player_list, 'player_in_game_list');
         document.getElementById("explication").appendChild(create_element("div", incr, "explication_div", "", items[incr]['info']['explication']));
     }else{
-        document.getElementById('valid_turn_button').value = 'Valider le tour ! !';
+        document.getElementById('valid_turn_button').value = 'Valider le tour !';
         remove_class("explication_div");
         hide_id('explication');
         show_id('reponse');
