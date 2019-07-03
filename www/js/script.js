@@ -108,6 +108,7 @@ function add_user(id, incr) {
     if(count_class("user_form")>7 && count_class("add_user_button")==1){
         document.getElementById('addUser').classList.add('hidden');
     }
+    ScrollToBottom('player_list');
 }
 
 //suppression de joueur au lancement du jeux

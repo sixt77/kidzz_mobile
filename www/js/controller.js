@@ -113,7 +113,9 @@ function recuperation_formulaire(id) {
     return formData;
 }
 
-
+function ScrollToBottom($id) {
+    document.getElementById($id).scrollTo(0,document.getElementById($id).scrollHeight);
+}
 
 ////////////////////////////////////////////////////////application//////////////////////////////////////////////////////////////////////////////////////////////
 
