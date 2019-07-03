@@ -59,13 +59,15 @@ function remove_class_by_class(class1, class2) {
 }
 
 function  enable_by_class(class1) {
-    $( "."+class1+"" ).prop( "disabled", true );
+    $( "."+class1+"" ).prop( "disabled", false );
 }
 
 function disable_by_class(class1) {
-    $( "."+class1+"" ).prop( "disabled", false );
-    $( "."+class1+"" ).disabled = true;
-
+    $( "."+class1+"" ).prop( "disabled", true );
+    element = document.getElementsByClassName('disable_offline');
+    for(var i = 0; i < element.length; i++){
+        element[i].style.pointerEvents = 'none';
+    }
 }
 
 function remove_class_by_id(id, class1) {
@@ -581,7 +583,7 @@ function verification_reseau() {
 //mode en ligne
 function mode_en_ligne() {
     sessionStorage.setItem('network', 'true');
-    disable_by_class("disable_offline");
+    enable_by_class("disable_offline");
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
         classe[i].onclick = "";
@@ -592,8 +594,9 @@ function mode_en_ligne() {
 
 //mode hors ligne
 function mode_hors_ligne() {
+    console.log('ok');
     sessionStorage.setItem('network', 'false');
-    enable_by_class("disable_offline");
+    disable_by_class("disable_offline");
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
         classe[i].onclick = function() {return false;};
