@@ -54,19 +54,19 @@
 
                 <div id="question_area"></div>
 
-                <label for="input-share" id="share">
-                    <input type="checkbox" class="disabled" id="input-share" name="share">
-                    <span style="width: 100%;border-radius: 3px;">Partager</span>
-                </label>
+                <div id="remove_question"></div>
 
                 <label class="" for="addQuestion">
                     <input id="addQuestion" class="disabled" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
                     <span class="">Ajouter une question</span>
                 </label>
 
-            </form>
 
-            <div id="remove_question"></div>
+                <label for="input-share" id="share">
+                    <input type="checkbox" class="disabled" id="input-share" name="share">
+                    <span style="width: 100%;border-radius: 3px;">Partager</span>
+                </label>
+            </form>
 
             <input type="button" value="Modifier"  class="init-button button-create disable_offline" onclick="modifie_kidzz('question_form')">
 

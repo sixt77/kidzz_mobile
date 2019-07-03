@@ -16,7 +16,7 @@
 body {
     font-family: 'Roboto', 'PT Sans', sans-serif;
     font-size: 15px;
-    background-color: #fff8c4;
+    background-color: #efecdb;
 }
 
 a {
@@ -69,7 +69,8 @@ input:focus {
 
 .fa-home,
 .fa-sync,
-.fa-power-off {
+.fa-power-off,
+.fa-star {
     color: #fff;
 }
 
@@ -187,7 +188,7 @@ input:focus {
     display: flex;
     padding: 15px 20px;
     justify-content: space-around;
-    background-color: #575fcf;
+    background-color: #3c40c6;
 }
 
 .container-form-button {
@@ -240,11 +241,12 @@ h1 {
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 46px;
     line-height: 30px;
     margin-left: 10px;
     font-family: 'Comfortaa', sans-serif;
     color: #fff;
+    font-weight: 900;
 }
 
 .name-question {
@@ -295,13 +297,14 @@ h2 {
     width: 100%;
     height: calc((100vh - 150px) / 4);
     min-height: 40px;
-    font-size: 35px;
-    box-shadow: inset 0 5px 5px -5px;
+    font-size: 30px;
+    box-shadow: inset 0 5px 5px -5px #000;
     border: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1e272e;
+    color: #fff;
+    font-family: 'Comfortaa', sans-serif;
 }
 
 .button-manage-plus {
@@ -338,9 +341,12 @@ h2 {
     height: 60px;
     border-left: 1px solid;
     border-bottom: 1px solid;
+    border-color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #575fcf;
+    color: #fff;
 }
 
 .button-valided {
@@ -381,14 +387,15 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #575fcf;
 }
 
 .button-star-up {
-    color: #000;
+    color: #fff;
 }
 
 .button-star-down {
-    color: #000;
+    color: #fff;
 }
 
 .button-menu-play {
@@ -396,19 +403,19 @@ h2 {
 }
 
 .button-menu-manage {
-    background-color: #ff5e57;
+    background-color: #4f53c1;
 }
 
 .button-menu-online {
-    background-color: #fff8c4;
-}
-
-.button-menu-myKidzz {
-    background-color: #ffdd59;
+    background-color: #9092ca;
 }
 
 .button-menu-favorite {
-    background-color: #ffc048;
+    background-color: #797bc5;
+}
+
+.button-menu-myKidzz {
+    background-color: #6467c7;
 }
 
 .button-note {
@@ -582,7 +589,7 @@ h2 {
     border: 1px solid;
     margin-bottom: 50px;
     border-radius: 10px;
-    background-color: #ffdd59;
+    background-color: #1e272e;
 }
 
 
@@ -594,11 +601,12 @@ h2 {
     text-align: center;
     font-size: 22px;
     height: 60px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffc048;
+    background-color: #575fcf;
+    color: #fff;
 }
 
 
@@ -613,6 +621,7 @@ h2 {
     text-align: center;
     font-size: 30px;
     margin: 25px 0 10px;
+    color: #fff;
 }
 
 .kidzz_div_list_item_description {
@@ -621,6 +630,7 @@ h2 {
     line-height: 18px;
     font-size: 18px;
     padding: 10px 15px 0;
+    color: #fff;
 }
 
 
