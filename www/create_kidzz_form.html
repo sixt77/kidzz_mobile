@@ -53,6 +53,11 @@
                     <input type='text' class="input-log" id="kidzz_description" name="description" value="" required maxlength="100"  oninput="verify_input_kidzz(this)">
                 </label>
 
+                <label for="input-share" id="share">
+                    <input type="checkbox" class="disabled" id="input-share" name="share" checked>
+                    <span style="width: 100%;border-radius: 3px;border: none;">Partager</span>
+                </label>
+
                 <div id="question_area">
                     <div id="div_question_1">
                         <div id="question_1" class="question_form">
@@ -97,12 +102,6 @@
                 <label class="" for="addQuestion">
                     <input id="addQuestion" class="disabled" type="button" onclick="add_question('question_area', count_class('question_form')+1)">
                     <span class="">Ajouter une question</span>
-                </label>
-
-
-                <label for="input-share" id="share">
-                    <input type="checkbox" class="disabled" id="input-share" name="share" checked>
-                    <span style="width: 100%;border-radius: 3px;border: none;">Partager</span>
                 </label>
             </form>
 
