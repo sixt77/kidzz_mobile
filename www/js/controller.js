@@ -232,9 +232,7 @@ function verify_kidzz() {
         }
     }
     for (var j in kidzz_input_question) {
-        console.log(kidzz_input_question[j]);
         if(kidzz_input_question[j].value == ''){
-
             kidzz_input_question[j].classList.add('empty_input');
             verif = false;
         }
@@ -253,6 +251,26 @@ function verify_kidzz() {
     }
     return verif;
 }
+
+function verify_question() {
+    question = document.getElementById('question_area').childNodes;
+    verif = true;
+    var i = 0;
+    while(i < question.length){
+        count = 0;
+        for (var j = 1; j < 5; j++) {
+            if(document.getElementById('answer_'+j+'_'+(i+1)+'_validity').checked == true){
+                count++;
+            }
+        }
+        if(count == 0){
+            verif = false;
+        }
+        i++;
+    }
+    return verif;
+}
+
 
 function verify_input_kidzz(item) {
     if(item.value != '' && item.classList.contains('empty_input')){
@@ -314,7 +332,11 @@ function edition_kidzz_callback(response) {
 //modification de kidzz
 function modifie_kidzz(id) {
     if(verify_kidzz()){
-        envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+        if(verify_question()){
+            envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
+        }else{
+            show_snack_bar('il faut au moins une réponse valide à toutes les questions');
+        }
     }else{
         show_snack_bar('formulaire incomplet');
     }
@@ -356,10 +378,10 @@ function recuperation_kidzz_en_ligne_callback(response) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
             }else{
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -396,10 +418,10 @@ function recuperation_en_ligne_mes_kidzz_callback(response) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
             }else{
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -429,10 +451,10 @@ function recuperation_hors_ligne_mes_kidzz() {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
         if(response[i]['favoris'] == true){
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
         }else{
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
         }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -464,10 +486,10 @@ function recuperation_en_ligne_kidzz_favoris_callback(response) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
             }else{
                 document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -497,10 +519,10 @@ function recuperation_hors_ligne_kidzz_favoris() {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
         if(response[i]['favoris'] == true){
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up',"", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
         }else{
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down',"", ""));
+            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
         }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
