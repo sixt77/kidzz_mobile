@@ -145,8 +145,20 @@ function affichage_login() {
 
 //connexion
 function connexion(login, password) {
-    show_loading_snack_bar("connexion...");
-    identification(login, password, connexion_callback);
+    input_log = document.getElementsByClassName('input-log');
+    count = 0;
+    for(var i = 0; i < input_log.length; i++){
+        if(input_log[i].value != ''){
+            count++;
+        }
+    }
+    if(count == 2){
+        show_loading_snack_bar("connexion...");
+        identification(login, password, connexion_callback);
+    }else{
+        show_snack_bar("formulaire incomplet");
+    }
+
 }
 
 //connexion automatique
@@ -162,11 +174,18 @@ function connexion_automatique() {
 //connexion callback
 function connexion_callback(response) {
     response = JSON.parse(response);
+
     if(response[0] == true){
-        response = response[1];
-        sessionStorage.setItem('utilisateur', JSON.stringify(response));
-        localStorage.setItem('utilisateur', JSON.stringify(response));
-        document.location.href="home.html";
+        if(response[1] != false){
+            response = response[1];
+            sessionStorage.setItem('utilisateur', JSON.stringify(response));
+            localStorage.setItem('utilisateur', JSON.stringify(response));
+            document.location.href="home.html";
+        }else{
+            show_snack_bar("identifiants incorrects");
+            sessionStorage.removeItem('utilisateur');
+            localStorage.removeItem('utilisateur');
+        }
     }else{
         show_snack_bar(response[1]);
         sessionStorage.removeItem('utilisateur');
@@ -176,8 +195,20 @@ function connexion_callback(response) {
 
 //incription
 function inscription(id) {
-    show_loading_snack_bar("inscription...");
-    envoie_formulaire(recuperation_formulaire(id), connexion_callback, 'subscribe');
+    input_log = document.getElementsByClassName('input-log');
+    count = 0;
+    for(var i = 0; i < input_log.length; i++){
+        if(input_log[i].value != ''){
+            count++;
+        }
+    }
+    if(count == 4){
+        show_loading_snack_bar("inscription...");
+        envoie_formulaire(recuperation_formulaire(id), connexion_callback, 'subscribe');
+    }else{
+        show_snack_bar("formulaire incomplet");
+    }
+
 }
 
 
@@ -696,7 +727,6 @@ function retirer_favoris_callback(response){
 //mode hors ligne
 //verification
 function verification_reseau() {
-    console.log(sessionStorage.getItem('network'));
     if(sessionStorage.getItem('network') == 'false'){
         network = false;
         mode_hors_ligne();
@@ -713,7 +743,7 @@ function mode_en_ligne() {
     sessionStorage.setItem('network', 'true');
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
-        classe[i].onclick = "";
+        classe[i].onclick = classe[i].content;
     }
     network = true;
     enable_by_class("disable_offline");
@@ -726,6 +756,7 @@ function mode_hors_ligne() {
     sessionStorage.setItem('network', 'false');
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
+        classe[i].content = classe[i].onclick;
         classe[i].onclick = function() {return false;};
     }
     disable_by_class("disable_offline");
@@ -761,7 +792,6 @@ function recuperation_kidzz_hors_ligne() {
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {
-    console.log(response);
     response = JSON.parse(response);
     if(response[0] == true){
         if(response.length < 2000000) {
