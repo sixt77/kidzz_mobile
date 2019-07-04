@@ -174,9 +174,9 @@ function connexion_automatique() {
 //connexion callback
 function connexion_callback(response) {
     response = JSON.parse(response);
-
+    console.log(response);
     if(response[0] == true){
-        if(response[1] != false){
+        if(response[1] != false && response[1] != null){
             response = response[1];
             sessionStorage.setItem('utilisateur', JSON.stringify(response));
             localStorage.setItem('utilisateur', JSON.stringify(response));
