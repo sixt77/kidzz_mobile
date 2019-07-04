@@ -99,10 +99,20 @@ function count_class($class){
     return $( "."+$class+"" ).length;
 }
 
+function show_loading_snack_bar(text) {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = text;
+    if(!x.classList.contains("show")){
+        x.classList.add("show");
+    }
+}
+
 function show_snack_bar(text) {
     var x = document.getElementById("snackbar");
     x.innerHTML = text;
-    x.classList.add("show");
+    if(!x.classList.contains("show")){
+        x.classList.add("show");
+    }
     setTimeout(function(){ x.classList.remove("show"); }, 4000);
 }
 
@@ -135,6 +145,7 @@ function affichage_login() {
 
 //connexion
 function connexion(login, password) {
+    show_loading_snack_bar("connexion...");
     identification(login, password, connexion_callback);
 }
 
@@ -151,34 +162,25 @@ function connexion_automatique() {
 //connexion callback
 function connexion_callback(response) {
     response = JSON.parse(response);
-    if(response !== null && response[0] !== undefined){
+    if(response[0] == true){
+        response = response[1];
         sessionStorage.setItem('utilisateur', JSON.stringify(response));
         localStorage.setItem('utilisateur', JSON.stringify(response));
         document.location.href="home.html";
     }else{
-        show_snack_bar("connexion refusé");
+        show_snack_bar(response[1]);
         sessionStorage.removeItem('utilisateur');
         localStorage.removeItem('utilisateur');
     }
-
 }
 
 //incription
 function inscription(id) {
-    envoie_formulaire(recuperation_formulaire(id), inscription_callback, 'subscribe');
+    show_loading_snack_bar("inscription...");
+    envoie_formulaire(recuperation_formulaire(id), connexion_callback, 'subscribe');
 }
 
-//inscription callback
-function inscription_callback(response) {
-    console.log(response);
-    if(response !== null && response[0] !== undefined && JSON.parse(response) != false){
-        sessionStorage.setItem('utilisateur', JSON.stringify(response));
-        localStorage.setItem('utilisateur', JSON.stringify(response));
-        document.location.href="home.html";
-    }else{
-        show_snack_bar("erreur");
-    }
-}
+
 //déconnexion
 function deconnexion() {
     sessionStorage.clear();
@@ -290,6 +292,7 @@ function verify_input_kidzz(item) {
 function creer_kidzz(id) {
     if(verify_kidzz()){
         if(verify_question()){
+            show_loading_snack_bar("creation...");
             envoie_formulaire(recuperation_formulaire(id), creer_kidzz_callback, 'create_kidzz');
         }else{
             show_snack_bar('il faut au moins une réponse valide à toutes les questions');
@@ -310,6 +313,7 @@ function creer_kidzz_callback(response) {
 }
 //suppression de kidzz (kidzz + questions + reponses)
 function supprime_kidzz(id) {
+    show_loading_snack_bar("suppression...");
     envoie_formulaire(recuperation_session(), supprime_kidzz_callback, 'delete_kidzz', '&id_kidzz='+id);
 }
 function supprime_kidzz_callback(response) {
@@ -346,6 +350,7 @@ function edition_kidzz_callback(response) {
 function modifie_kidzz(id) {
     if(verify_kidzz()){
         if(verify_question()){
+            show_loading_snack_bar("modification...");
             envoie_formulaire(recuperation_formulaire(id), modifie_kidzz_callback, 'edit_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
         }else{
             show_snack_bar('il faut au moins une réponse valide à toutes les questions');
@@ -389,11 +394,15 @@ function recuperation_kidzz_en_ligne_callback(response) {
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline disabled',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline disabled',"", ""));
             }else{
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline disabled',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline disabled',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -426,11 +435,15 @@ function recuperation_en_ligne_mes_kidzz_callback(response) {
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline disabled',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline disabled',"", ""));
             }else{
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline disabled',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline disabled',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -459,17 +472,22 @@ function recuperation_hors_ligne_mes_kidzz() {
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_'+response[i]['id'], 'kidzz_div_list'));
         if(response[i]['favoris'] == true){
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline disabled',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline disabled',"", ""));
         }else{
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline disabled',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline disabled',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline',"", ""));
         }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_'+i,'kidzz_div_list_item kidzz_div_list_item_name','', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_'+i,'kidzz_div_list_item kidzz_div_list_item_description','', response[i]['description']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_'+i,'kidzz_div_list_item kidzz_div_list_item_note','', response[i]['note']));
     }
+    mode_hors_ligne();
 }
 
 //choix du kidzz dans les favoris de l'utilisateur
@@ -492,11 +510,15 @@ function recuperation_en_ligne_kidzz_favoris_callback(response) {
         for (var i = 0; i < response.length; i++) {
             document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
             if(response[i]['favoris'] == true){
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline disabled',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline disabled',"", ""));
             }else{
-                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-                document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline disabled',"retirer_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline disabled',"", ""));
+                document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+                document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline',"", ""));
             }
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
             document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
@@ -525,17 +547,22 @@ function recuperation_hors_ligne_kidzz_favoris() {
     for (var i = 0; i < response.length; i++) {
         document.getElementById('kidzz_list').appendChild(create_element('div', 'kidzz_' + response[i]['id'], 'kidzz_div_list'));
         if(response[i]['favoris'] == true){
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'fas fa-star button-star button-star-up disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline disabled',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline disabled',"", ""));
         }else{
-            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_div_'+i,'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
-            document.getElementById('id_button_star_div_'+i).appendChild(create_element('i', 'id_button_star_'+i,'far fa-star button-star button-star-down  disable_offline',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_up_div_'+response[i]['id'],'disable_offline disabled',"retirer_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_up_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_up_'+response[i]['id'],'fas fa-star button-star button-star-up disable_offline disabled',"", ""));
+            document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('div', 'id_button_star_down_div_'+response[i]['id'],'disable_offline',"ajouter_favoris(" + response[i]['id']+")", ""));
+            document.getElementById('id_button_star_down_div_'+response[i]['id']).appendChild(create_element('i', 'id_button_star_down_'+response[i]['id'],'far fa-star button-star button-star-down  disable_offline',"", ""));
         }
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_name_' + i, 'kidzz_div_list_item kidzz_div_list_item_name', '', response[i]['nom']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('i', 'id_button_play_'+i,'fas fa-play button-play','choix_kidzz('+response[i]['id']+')', ""));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_description_' + i, 'kidzz_div_list_item kidzz_div_list_item_description', '', response[i]['description']));
         document.getElementById('kidzz_' + response[i]['id']).appendChild(create_element('p', 'id_kdzz_note_' + i, 'kidzz_div_list_item kidzz_div_list_item_note', '', response[i]['note']));
     }
+    mode_hors_ligne();
 }
 
 //lancement de la partie
@@ -600,6 +627,7 @@ function preparation_hors_ligne_jeux() {
 
 //notation du kidzz
 function noter_kidzz(id) {
+    show_loading_snack_bar("notation en cours...");
     envoie_formulaire(recuperation_formulaire(id), noter_kidzz_callback, 'rate_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
 }
 
@@ -614,6 +642,7 @@ function noter_kidzz_callback(response) {
 
 //report du kidzz
 function reporter_kidzz(id) {
+    show_loading_snack_bar("report en cours...");
     envoie_formulaire(recuperation_formulaire(id), reporter_kidzz_callback, 'report_kidzz', '&id_kidzz='+sessionStorage.getItem('id_kidzz'));
 }
 
@@ -628,13 +657,18 @@ function reporter_kidzz_callback(response) {
 
 //ajout en favoris
 function ajouter_favoris(id){
+    show_loading_snack_bar("ajout en cours...");
     envoie_formulaire(recuperation_session(), ajouter_favoris_callback, 'add_kidzz_to_favorite', '&id_kidzz='+id);
 }
 
 function ajouter_favoris_callback(response){
-    if(JSON.parse(response)[0] == true){
-        sessionStorage.setItem('message', JSON.parse(response)[1]);
-        location.reload();
+    response = JSON.parse(response);
+    if(response[0] == true){
+        document.getElementById('id_button_star_down_div_'+response[2]).classList.add("disabled");
+        document.getElementById('id_button_star_down_'+response[2]).classList.add("disabled");
+        document.getElementById('id_button_star_up_div_'+response[2]).classList.remove("disabled");
+        document.getElementById('id_button_star_up_'+response[2]).classList.remove("disabled");
+        show_snack_bar(response[1]);
     }else{
         show_snack_bar(JSON.parse(response)[1]);
     }
@@ -642,13 +676,18 @@ function ajouter_favoris_callback(response){
 
 //retrait favoris
 function retirer_favoris(id){
-    envoie_formulaire(recuperation_session(), ajouter_favoris_callback, 'remove_kidzz_to_favorite', '&id_kidzz='+id);
+    show_loading_snack_bar("retrait en cours...");
+    envoie_formulaire(recuperation_session(), retirer_favoris_callback, 'remove_kidzz_to_favorite', '&id_kidzz='+id);
 }
 
 function retirer_favoris_callback(response){
-    if(JSON.parse(response)[0] == true){
-        sessionStorage.setItem('message', JSON.parse(response)[1]);
-        location.reload();
+    response = JSON.parse(response);
+    if(response[0] == true){
+        document.getElementById('id_button_star_up_div_'+response[2]).classList.add("disabled");
+        document.getElementById('id_button_star_up_'+response[2]).classList.add("disabled");
+        document.getElementById('id_button_star_down_div_'+response[2]).classList.remove("disabled");
+        document.getElementById('id_button_star_down_'+response[2]).classList.remove("disabled");
+        show_snack_bar(response[1]);
     }else{
         show_snack_bar(JSON.parse(response)[1]);
     }
@@ -657,6 +696,7 @@ function retirer_favoris_callback(response){
 //mode hors ligne
 //verification
 function verification_reseau() {
+    console.log(sessionStorage.getItem('network'));
     if(sessionStorage.getItem('network') == 'false'){
         network = false;
         mode_hors_ligne();
@@ -671,12 +711,12 @@ function verification_reseau() {
 //mode en ligne
 function mode_en_ligne() {
     sessionStorage.setItem('network', 'true');
-    enable_by_class("disable_offline");
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
         classe[i].onclick = "";
     }
     network = true;
+    enable_by_class("disable_offline");
     remove_class_by_class("disable_offline", "offline_mode");
 }
 
@@ -684,17 +724,19 @@ function mode_en_ligne() {
 //mode hors ligne
 function mode_hors_ligne() {
     sessionStorage.setItem('network', 'false');
-    disable_by_class("disable_offline");
     classe = document.getElementsByClassName("link_disable_offline");
     for (var i in classe) {
         classe[i].onclick = function() {return false;};
     }
-    network = false;
+    disable_by_class("disable_offline");
     add_class_by_class("disable_offline", "offline_mode");
+    network = false;
+
 }
 
 //verification des données hors ligne
 function verification_kidzz_hors_ligne() {
+    show_loading_snack_bar("verification des données");
     envoie_formulaire(recuperation_session(), verification_kidzz_hors_ligne_callback, 'check_offline_kidzz');
 }
 function verification_kidzz_hors_ligne_callback(response) {
@@ -715,6 +757,7 @@ function verification_kidzz_hors_ligne_callback(response) {
 
 //recuperation des données hors lignes
 function recuperation_kidzz_hors_ligne() {
+    show_loading_snack_bar("téléchargement des données");
     envoie_formulaire(recuperation_session(), recuperation_kidzz_hors_ligne_callback, 'get_offline_kidzz');
 }
 function recuperation_kidzz_hors_ligne_callback(response) {

@@ -23,6 +23,10 @@ a {
     text-decoration: none;
     color: #000;
 }
+a:active
+{
+    outline:none;
+}
 
 li {
     list-style: none;
